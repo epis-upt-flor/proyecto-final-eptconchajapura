@@ -1,0 +1,109 @@
+﻿/* Estilos globales */
+body {
+    background-color: #0d1b2a; /* Azul oscuro */
+    color: #ced4da; /* Gris claro para texto */
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el body tenga al menos la altura de la ventana */
+}
+
+.content-wrapper {
+    flex: 1; /* Hace que el contenido principal ocupe todo el espacio disponible */
+}
+
+.navbar {
+    background-color: #162447; /* Azul más oscuro para la barra de navegación */
+    border-bottom: 1px solid #1c2b3f; /* Borde sutil */
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #ced4da !important; /* Texto claro en la barra de navegación */
+}
+
+    .navbar-brand:hover,
+    .navbar-nav .nav-link:hover {
+        color: #bb86fc !important; /* Color morado claro al pasar el mouse */
+    }
+
+button.btn {
+    background-color: #ced4da; /* Botones grises claros */
+    color: #0d1b2a; /* Texto oscuro en botones */
+    border: none;
+}
+
+    button.btn:hover {
+        background-color: #bb86fc; /* Cambio de color al pasar el mouse */
+        color: #ffffff; /* Texto blanco al pasar el mouse */
+    }
+
+footer {
+    background-color: #162447; /* Mismo azul oscuro que la barra de navegación */
+    color: #ced4da; /* Texto claro */
+    text-align: center;
+    padding: 1rem 0;
+}
+
+    footer a {
+        color: #bb86fc; /* Enlaces morados claros */
+    }
+
+        footer a:hover {
+            color: #ffffff; /* Blanco al pasar el mouse */
+        }
+
+/* Tablas responsivas */
+table {
+    background-color: #1c2b3f; /* Fondo oscuro para tablas */
+    color: #ced4da; /* Texto claro */
+}
+
+th {
+    background-color: #162447; /* Encabezados de tabla más oscuros */
+}
+
+tr:hover {
+    background-color: #1c2b3f; /* Resaltado al pasar el mouse */
+}
+
+/* Mejoras visuales para inputs y botones */
+input.form-control {
+    background-color: #1c2b3f; /* Fondo oscuro para inputs */
+    color: #ced4da; /* Texto claro */
+    border: 1px solid #333; /* Borde discreto */
+}
+
+    input.form-control:focus {
+        border-color: #bb86fc; /* Cambio de color al enfocar */
+        box-shadow: 0 0 5px rgba(187, 134, 252, 0.5); /* Sombra morada */
+    }
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.5rem 1rem;
+    }
+
+    body {
+        font-size: 14px;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+
+    footer {
+        font-size: 0.9rem;
+    }
+
+        footer a {
+            display: block;
+            margin: 0.5rem 0;
+        }
+}

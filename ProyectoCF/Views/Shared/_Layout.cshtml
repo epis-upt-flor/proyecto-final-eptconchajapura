@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProyectoCF</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="~/lib/bootstrap/dist/css/layout.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm">
+            <div class="container-fluid">
+                <!-- Botón de salir -->
+                <form asp-action="Logout" asp-controller="Auth" method="post" class="d-inline">
+                    <button type="submit" class="btn me-3">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </form>
+
+                <!-- Logo del proyecto -->
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-book"></i> ProyectoCF
+                </a>
+
+                <!-- Botón de menú móvil -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menú de navegación -->
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Docente")
+                            {
+                                <span class="nav-link">
+                                    <i class="fas fa-users"></i> Usuarios
+                                </span>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Docente")
+                            {
+                                <span class="nav-link">
+                                    <i class="fas fa-chalkboard"></i> Cursos
+                                </span>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Docente")
+                            {
+                                <span class="nav-link">
+                                    <i class="fas fa-file-alt"></i> Materiales
+                                </span>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Docente")
+                            {
+                                <span class="nav-link">
+                                    <i class="fas fa-user-check"></i> Asignaciones
+                                </span>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (Context.Session.GetString("Rol") == "Estudiante")
+                            {
+                                <span class="nav-link">
+                                    <i class="fas fa-comments"></i> Chat IA
+                                </span>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-link">
+                                <i class="fas fa-poll-h"></i> Evaluaciones
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                @* <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Docente")
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="Index">
+                                    <i class="fas fa-users"></i> Usuarios
+                                </a>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Docente")
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Cursos" asp-action="Index">
+                                    <i class="fas fa-chalkboard"></i> Cursos
+                                </a>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Docente")
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Materiales" asp-action="Index">
+                                    <i class="fas fa-file-alt"></i> Materiales
+                                </a>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Docente")
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="EstudiantesCursos" asp-action="Index">
+                                    <i class="fas fa-user-check"></i> Asignaciones
+                                </a>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (Context.Session.GetString("Rol") == "Estudiante")
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Chat" asp-action="Index">
+                                    <i class="fas fa-comments"></i> Chat IA
+                                </a>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Evaluaciones" asp-action="Index">
+                                <i class="fas fa-poll-h"></i> Evaluaciones
+                            </a>
+                        </li>
+                    </ul>
+                </div> *@
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenedor principal con Flexbox -->
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            &copy; 2025 - ProyectoCF -
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">
+                <i class="fas fa-shield-alt"></i> Privacy
+            </a>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
