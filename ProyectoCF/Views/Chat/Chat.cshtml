@@ -1,0 +1,87 @@
+﻿@{
+    var curso = ViewBag.Curso as ProyectoCF.Models.Curso;
+}
+
+<h2 class="text-center mt-4">Chat sobre el Curso: @curso?.Nombre</h2>
+
+<div class="container mt-4">
+    <div id="chat-box" class="border rounded p-3 mb-3" style="height: 300px; overflow-y: auto;">
+        <!-- Los mensajes aparecerán aquí -->
+    </div>
+
+    <div class="input-group">
+        <input type="text" id="user-input" class="form-control" placeholder="Escribe tu pregunta..." required />
+        <button id="send-button" class="btn btn-primary">Enviar</button>
+    </div>
+
+    <!-- Indicador de carga -->
+    <div id="loading-indicator" class="text-center mt-3 d-none">
+        <img src="https://i.imgur.com/00D5UYa.gif" alt="Cargando..." width="150" />
+        <p class="mt-2">Pensando...</p>
+    </div>
+</div>
+
+<script>
+    const cursoId = @((curso != null) ? curso.Id : 0);
+    const chatBox = document.getElementById('chat-box');
+    const userInput = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-button');
+    const loadingIndicator = document.getElementById('loading-indicator');
+
+    // Función para agregar un mensaje al chat con Markdown
+    function addMessageToChat(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.innerHTML = `<strong>${sender}:</strong> ${marked.parse(message || '')}`;
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Manejar el clic en el botón "Enviar"
+    sendButton.addEventListener('click', async () => {
+        const message = userInput.value.trim();
+        if (!message) {
+            alert("Por favor, escribe un mensaje antes de enviar.");
+            return;
+        }
+
+        // Mostrar el mensaje del usuario
+        addMessageToChat('Tú', message);
+
+        // Limpiar el campo de entrada
+        userInput.value = '';
+
+        // Mostrar el indicador de carga
+        sendButton.disabled = true;
+        loadingIndicator.classList.remove('d-none');
+
+        try {
+            const response = await fetch('/Chat/SendMessage', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cursoId, message })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
+
+            const data = await response.json();
+            if (data.error) {
+                addMessageToChat('Error', data.error);
+            } else {
+                // Mostrar la respuesta de la IA con Markdown
+                addMessageToChat('IA', data.iaResponse);
+            }
+        } catch (error) {
+            console.error("Error durante la solicitud:", error);
+            addMessageToChat('Error', error.message);
+        } finally {
+            // Ocultar el indicador de carga
+            sendButton.disabled = false;
+            loadingIndicator.classList.add('d-none');
+        }
+    });
+</script>
+
+<!-- Agregar la biblioteca Marked.js para renderizar Markdown -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>

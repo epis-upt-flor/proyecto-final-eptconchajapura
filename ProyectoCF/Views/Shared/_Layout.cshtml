@@ -36,55 +36,6 @@
                         <li class="nav-item">
                             @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Docente")
                             {
-                                <span class="nav-link">
-                                    <i class="fas fa-users"></i> Usuarios
-                                </span>
-                            }
-                        </li>
-                        <li class="nav-item">
-                            @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Docente")
-                            {
-                                <span class="nav-link">
-                                    <i class="fas fa-chalkboard"></i> Cursos
-                                </span>
-                            }
-                        </li>
-                        <li class="nav-item">
-                            @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Docente")
-                            {
-                                <span class="nav-link">
-                                    <i class="fas fa-file-alt"></i> Materiales
-                                </span>
-                            }
-                        </li>
-                        <li class="nav-item">
-                            @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Docente")
-                            {
-                                <span class="nav-link">
-                                    <i class="fas fa-user-check"></i> Asignaciones
-                                </span>
-                            }
-                        </li>
-                        <li class="nav-item">
-                            @if (Context.Session.GetString("Rol") == "Estudiante")
-                            {
-                                <span class="nav-link">
-                                    <i class="fas fa-comments"></i> Chat IA
-                                </span>
-                            }
-                        </li>
-                        <li class="nav-item">
-                            <span class="nav-link">
-                                <i class="fas fa-poll-h"></i> Evaluaciones
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-                @* <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            @if (Context.Session.GetString("Rol") == "Administrador" || Context.Session.GetString("Rol") == "Docente")
-                            {
                                 <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="Index">
                                     <i class="fas fa-users"></i> Usuarios
                                 </a>
@@ -128,7 +79,7 @@
                             </a>
                         </li>
                     </ul>
-                </div> *@
+                </div>
             </div>
         </nav>
     </header>
