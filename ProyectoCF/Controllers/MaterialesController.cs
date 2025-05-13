@@ -21,27 +21,55 @@ namespace ProyectoCF.Controllers
             var rol = HttpContext.Session.GetString("Rol");
             var usuarioId = int.Parse(HttpContext.Session.GetString("UsuarioId"));
 
+            List<Material> materiales;
+            List<Entregable> entregas;
+
             if (rol == "Docente")
             {
-                var materiales = _context.Materiales
+                // Traemos los materiales del docente en memoria
+                materiales = _context.Materiales
                     .Include(m => m.Curso)
                     .Where(m => m.Curso.DocenteId == usuarioId)
                     .ToList();
 
-                return View(materiales);
+                // Traemos todas las entregas
+                entregas = _context.Entregables
+                    .Include(e => e.Usuario)
+                    .ToList();
             }
-
-            if (rol == "Administrador")
+            else if (rol == "Administrador")
             {
-                var materiales = _context.Materiales
+                // Traemos todos los materiales en memoria para el administrador
+                materiales = _context.Materiales
                     .Include(m => m.Curso)
                     .ToList();
 
-                return View(materiales);
+                // Traemos todas las entregas
+                entregas = _context.Entregables
+                    .Include(e => e.Usuario)
+                    .ToList();
+            }
+            else
+            {
+                return Forbid();
             }
 
-            return Forbid();
+            // Obtenemos los IDs de los materiales
+            var materialIds = materiales.Select(m => m.Id).ToList();
+
+            // Filtramos las entregas en memoria
+            var entregasFiltradas = entregas
+                .Where(e => materialIds.Contains(e.MaterialId))  // Se filtra en memoria
+                .GroupBy(e => e.MaterialId)
+                .ToDictionary(g => g.Key, g => g.ToList());
+
+            // Pasamos las entregas filtradas a la vista
+            ViewBag.EntregasPorMaterial = entregasFiltradas;
+
+            // Pasamos los materiales a la vista
+            return View(materiales);
         }
+
 
 
         public IActionResult Create()

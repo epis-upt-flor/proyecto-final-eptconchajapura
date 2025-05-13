@@ -1,15 +1,13 @@
-using Microsoft.AspNetCore.Authentication.Google;
+ï»¿using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.EntityFrameworkCore;
 using ProyectoCF.Models;
 using ProyectoCF.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Registrar servicios
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 
-// Configurar DbContext
 builder.Services.AddDbContext<Connection>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -17,7 +15,6 @@ builder.Services.AddDbContext<Connection>(options =>
     )
 );
 
-// Configurar caché y sesión
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -26,7 +23,6 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// Configurar autenticación con Google
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = "Cookies";
@@ -39,16 +35,19 @@ builder.Services.AddAuthentication(options =>
     options.ClientSecret = builder.Configuration["GoogleAuth:ClientSecret"];
 });
 
-// Leer configuración de Telegram
 var telegramConfig = builder.Configuration.GetSection("Telegram");
 builder.Services.AddSingleton(new TelegramService(
     telegramConfig["BotToken"],
     telegramConfig["GroupId"]
 ));
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Limits.MaxRequestBodySize = 100_000_000;
+});
+
 var app = builder.Build();
 
-// Configuración del entorno
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -57,6 +56,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.Use(async (context, next) =>
+{
+    context.Request.EnableBuffering();
+    await next();
+});
+
 app.UseRouting();
 
 app.UseAuthentication();

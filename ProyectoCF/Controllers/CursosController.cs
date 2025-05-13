@@ -83,8 +83,17 @@ namespace ProyectoCF.Controllers
                 return NotFound();
             }
 
+            var usuarioId = int.Parse(HttpContext.Session.GetString("UsuarioId"));
+            var entregados = _context.Entregables
+                .Where(e => e.UsuarioId == usuarioId)
+                .Select(e => e.MaterialId)
+                .ToList();
+
+            ViewBag.Entregados = entregados;
+
             return View(curso);
         }
+
 
 
         public IActionResult Create()
