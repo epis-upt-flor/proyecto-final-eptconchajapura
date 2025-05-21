@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProyectoCF")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+17f2894ef1a28f3a276fd96814c6c0565a9ffa77")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProyectoCF")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProyectoCF")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
