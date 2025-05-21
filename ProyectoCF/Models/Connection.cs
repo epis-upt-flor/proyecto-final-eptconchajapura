@@ -16,5 +16,6 @@ namespace ProyectoCF.Models
         public DbSet<Pregunta> Preguntas { get; set; }
         public DbSet<Respuesta> Respuestas { get; set; }
         public DbSet<Entregable> Entregables { get; set; }
+        public DbSet<RespuestaEstudiante> RespuestasEstudiantes { get; set; }
     }
 }

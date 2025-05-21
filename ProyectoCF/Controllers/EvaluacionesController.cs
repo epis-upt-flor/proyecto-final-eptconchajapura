@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProyectoCF.Models;
 using ProyectoCF.Services;
+using static ProyectoCF.Models.ViewModels;
 
 namespace ProyectoCF.Controllers
 {
@@ -34,7 +35,7 @@ namespace ProyectoCF.Controllers
                         Titulo = e.Titulo,
                         Descripcion = e.Descripcion,
                         CursoNombre = e.Curso.Nombre,
-                        YaRendida = false // Los administradores no tienen evaluaciones rendidas
+                        YaRendida = false
                     })
                     .ToList();
             }
@@ -49,7 +50,7 @@ namespace ProyectoCF.Controllers
                         Titulo = e.Titulo,
                         Descripcion = e.Descripcion,
                         CursoNombre = e.Curso.Nombre,
-                        YaRendida = false // Los docentes no tienen evaluaciones rendidas
+                        YaRendida = false
                     })
                     .ToList();
             }
@@ -110,12 +111,50 @@ namespace ProyectoCF.Controllers
             var evaluacion = _context.Evaluaciones
                 .Include(e => e.Curso)
                 .Include(e => e.Preguntas)
-                .ThenInclude(p => p.Respuestas)
+                    .ThenInclude(p => p.Respuestas)
                 .FirstOrDefault(e => e.Id == id);
 
             if (evaluacion == null)
             {
                 return NotFound();
+            }
+
+            var rol = HttpContext.Session.GetString("Rol");
+
+            if (rol == "Docente" || rol == "Administrador")
+            {
+                var respuestas = _context.RespuestasEstudiantes
+                    .Where(re => re.EvaluacionId == id)
+                    .Include(re => re.Estudiante)
+                    .Include(re => re.Pregunta)
+                    .Include(re => re.Respuesta)
+                    .ToList();
+
+                var notas = _context.Notas
+                    .Where(n => n.EvaluacionId == id)
+                    .ToList();
+
+                var respuestasAlumnos = respuestas
+                    .GroupBy(re => re.Estudiante)
+                    .Select(g => new RespuestasAlumnoViewModel
+                    {
+                        AlumnoId = g.Key.Id,
+                        NombreCompleto = $"{g.Key.Nombre} {g.Key.Apellido}",
+                        Respuestas = g.Select(r => new DetalleRespuestaViewModel
+                        {
+                            PreguntaId = r.PreguntaId,
+                            PreguntaTexto = r.Pregunta.Texto,
+                            RespuestaId = r.RespuestaId,
+                            RespuestaTexto = r.Respuesta.Texto,
+                            EsCorrecta = r.EsCorrecta,
+                            RespuestaCorrecta = r.Pregunta.Respuestas.FirstOrDefault(resp => resp.EsCorrecta)?.Texto ?? "No definida"
+                        }).OrderBy(r => r.PreguntaId).ToList(),
+                        Calificacion = notas.FirstOrDefault(n => n.EstudianteId == g.Key.Id)?.Calificacion ?? 0
+                    })
+                    .OrderBy(a => a.NombreCompleto)
+                    .ToList();
+
+                ViewData["RespuestasAlumnos"] = respuestasAlumnos;
             }
 
             return View(evaluacion);
@@ -169,18 +208,41 @@ namespace ProyectoCF.Controllers
 
             int totalPreguntas = model.Preguntas.Count;
             int respuestasCorrectas = 0;
+            var respuestasEstudiante = new List<RespuestaEstudiante>();
 
             foreach (var preguntaVM in model.Preguntas)
             {
+                var respuestaSeleccionada = _context.Respuestas
+                    .FirstOrDefault(r => r.Id == preguntaVM.RespuestaSeleccionada);
+
                 var respuestaCorrecta = _context.Respuestas
                     .Where(r => r.PreguntaId == preguntaVM.PreguntaId && r.EsCorrecta)
                     .FirstOrDefault();
 
-                if (respuestaCorrecta != null && preguntaVM.RespuestaSeleccionada == respuestaCorrecta.Id)
+                bool esCorrecta = respuestaSeleccionada?.Id == respuestaCorrecta?.Id;
+
+                if (esCorrecta)
                 {
                     respuestasCorrectas++;
                 }
+
+                var respuestaEstudiante = new RespuestaEstudiante
+                {
+                    EstudianteId = estudianteId,
+                    EvaluacionId = model.EvaluacionId,
+                    PreguntaId = preguntaVM.PreguntaId,
+                    RespuestaId = preguntaVM.RespuestaSeleccionada ?? 0,
+                    EsCorrecta = esCorrecta
+                };
+                if (preguntaVM.RespuestaSeleccionada == null || preguntaVM.RespuestaSeleccionada == 0)
+                {
+                    continue;
+                }
+
+                respuestasEstudiante.Add(respuestaEstudiante);
             }
+
+            _context.RespuestasEstudiantes.AddRange(respuestasEstudiante);
 
             double porcentaje = (double)respuestasCorrectas / totalPreguntas * 100;
 
@@ -195,15 +257,50 @@ namespace ProyectoCF.Controllers
             await _context.SaveChangesAsync();
 
             string estado = porcentaje >= 60 ? "✅ Aprobado" : "❌ Reprobado";
-            string mensajeTelegram = $"🎓 {estudiante.Nombre}"+$" {estudiante.Apellido}"+$" ha rendido: 📚 {evaluacion.Titulo}\n" +
-                                     $"📊 Puntaje: {porcentaje:F2}%\n" +
-                                     $"🎯 Estado: {estado}";
+            string mensajeTelegram = $"🎓 {estudiante.Nombre} {estudiante.Apellido} ha rendido: 📚 {evaluacion.Titulo}\n" +
+                                    $"📊 Puntaje: {porcentaje:F2}%\n" +
+                                    $"🎯 Estado: {estado}";
 
             await _telegramService.SendMessageAsync(mensajeTelegram);
 
             ViewBag.Resultado = $"Respondiste correctamente {respuestasCorrectas} de {totalPreguntas} preguntas. Tu puntaje es {porcentaje:F2}%.";
 
             return View("Resultado");
+        }
+
+        public IActionResult ObtenerRespuestasAlumnos(int evaluacionId)
+        {
+            var rol = HttpContext.Session.GetString("Rol");
+
+            if (rol != "Docente" && rol != "Administrador")
+            {
+                return Forbid();
+            }
+
+            var respuestas = _context.RespuestasEstudiantes
+                .Where(re => re.EvaluacionId == evaluacionId)
+                .Include(re => re.Estudiante)
+                .Include(re => re.Pregunta)
+                .Include(re => re.Respuesta)
+                .GroupBy(re => re.Estudiante)
+                .Select(g => new RespuestasAlumnoViewModel
+                {
+                    AlumnoId = g.Key.Id,
+                    NombreCompleto = $"{g.Key.Nombre} {g.Key.Apellido}",
+                    Respuestas = g.Select(r => new DetalleRespuestaViewModel
+                    {
+                        PreguntaTexto = r.Pregunta.Texto,
+                        RespuestaTexto = r.Respuesta.Texto,
+                        EsCorrecta = r.EsCorrecta,
+                        RespuestaCorrecta = _context.Respuestas
+                            .FirstOrDefault(resp => resp.PreguntaId == r.PreguntaId && resp.EsCorrecta).Texto
+                    }).ToList(),
+                    Calificacion = _context.Notas
+                        .FirstOrDefault(n => n.EvaluacionId == evaluacionId && n.EstudianteId == g.Key.Id).Calificacion
+                })
+                .ToList();
+
+            return PartialView("_RespuestasAlumnosModal", respuestas);
         }
 
         public IActionResult Delete(int id)
