@@ -1,50 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\",
+  "WorkspaceRootPath": "C:\\Users\\TM95\\Documents\\GitHub\\proyecto-final-eptconchajapura\\ProyectoCF\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|d:\\upt\\proyecto construccion\\proyectocf\\proyectocf.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:proyectocf.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|d:\\upt\\proyecto construccion\\proyectocf\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|d:\\upt\\proyecto construccion\\proyectocf\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|d:\\upt\\proyecto construccion\\proyectocf\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|d:\\upt\\proyecto construccion\\proyectocf\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|d:\\upt\\proyecto construccion\\proyectocf\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|d:\\upt\\proyecto construccion\\proyectocf\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|d:\\upt\\proyecto construccion\\proyectocf\\views\\evaluaciones\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:views\\evaluaciones\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|d:\\upt\\proyecto construccion\\proyectocf\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|d:\\upt\\proyecto construccion\\proyectocf\\views\\chat\\chat.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:views\\chat\\chat.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|d:\\upt\\proyecto construccion\\proyectocf\\models\\evaluacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:models\\evaluacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\TM95\\AppData\\Local\\Temp\\.vsdbgsrc\\7f0ac71252d76de7abb95c8ecd2f6dbb3d669a4d1aa351fe394c7ba2c4dd1103\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -59,136 +18,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ProyectoCF",
-              "DocumentMoniker": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\ProyectoCF.csproj",
-              "RelativeDocumentMoniker": "ProyectoCF.csproj",
-              "ToolTip": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\ProyectoCF.csproj",
-              "RelativeToolTip": "ProyectoCF.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-03T20:46:42.739Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Usuario.cs",
-              "DocumentMoniker": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Models\\Usuario.cs",
-              "RelativeDocumentMoniker": "Models\\Usuario.cs",
-              "ToolTip": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Models\\Usuario.cs",
-              "RelativeToolTip": "Models\\Usuario.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T21:41:51.316Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
-              "ToolTip": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T21:40:11.028Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
-              "ToolTip": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-26T21:39:49.519Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Views\\Auth\\Login.cshtml",
-              "RelativeDocumentMoniker": "Views\\Auth\\Login.cshtml",
-              "ToolTip": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Views\\Auth\\Login.cshtml",
-              "RelativeToolTip": "Views\\Auth\\Login.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-26T13:55:37.065Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Chat.cshtml",
-              "DocumentMoniker": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Views\\Chat\\Chat.cshtml",
-              "RelativeDocumentMoniker": "Views\\Chat\\Chat.cshtml",
-              "ToolTip": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Views\\Chat\\Chat.cshtml",
-              "RelativeToolTip": "Views\\Chat\\Chat.cshtml",
-              "ViewState": "AgIAACwAAAAAAAAAAAAkwFYAAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-26T13:47:15.282Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-26T13:39:00.885Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Views\\Evaluaciones\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Evaluaciones\\Index.cshtml",
-              "ToolTip": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Views\\Evaluaciones\\Index.cshtml",
-              "RelativeToolTip": "Views\\Evaluaciones\\Index.cshtml",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAgwD4AAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-25T20:25:20.377Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Evaluacion.cs",
-              "DocumentMoniker": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Models\\Evaluacion.cs",
-              "RelativeDocumentMoniker": "Models\\Evaluacion.cs",
-              "ToolTip": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Models\\Evaluacion.cs",
-              "RelativeToolTip": "Models\\Evaluacion.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T20:24:43.945Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAkwEsAAAAKAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\TM95\\AppData\\Local\\Temp\\.vsdbgsrc\\7f0ac71252d76de7abb95c8ecd2f6dbb3d669a4d1aa351fe394c7ba2c4dd1103\\Program.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\7f0ac71252d76de7abb95c8ecd2f6dbb3d669a4d1aa351fe394c7ba2c4dd1103\\Program.cs",
+              "ToolTip": "C:\\Users\\TM95\\AppData\\Local\\Temp\\.vsdbgsrc\\7f0ac71252d76de7abb95c8ecd2f6dbb3d669a4d1aa351fe394c7ba2c4dd1103\\Program.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\7f0ac71252d76de7abb95c8ecd2f6dbb3d669a4d1aa351fe394c7ba2c4dd1103\\Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAACAAAAAQAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T16:47:36.324Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "D:\\Upt\\Proyecto Construccion\\ProyectoCF\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-03-24T16:47:29.438Z"
+              "WhenOpened": "2025-05-21T02:17:31.697Z",
+              "EditorCaption": ""
             }
           ]
         }
