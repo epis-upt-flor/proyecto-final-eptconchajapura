@@ -239,6 +239,30 @@ namespace ProyectoCF.Migrations
                     b.ToTable("Preguntas");
                 });
 
+            modelBuilder.Entity("ProyectoCF.Models.Puntaje", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Valor")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Puntajes");
+                });
+
             modelBuilder.Entity("ProyectoCF.Models.Respuesta", b =>
                 {
                     b.Property<int>("Id")
@@ -262,6 +286,45 @@ namespace ProyectoCF.Migrations
                     b.HasIndex("PreguntaId");
 
                     b.ToTable("Respuestas");
+                });
+
+            modelBuilder.Entity("ProyectoCF.Models.RespuestaEstudiante", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("EsCorrecta")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("EstudianteId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EvaluacionId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaRespuesta")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("PreguntaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RespuestaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EstudianteId");
+
+                    b.HasIndex("EvaluacionId");
+
+                    b.HasIndex("PreguntaId");
+
+                    b.HasIndex("RespuestaId");
+
+                    b.ToTable("RespuestasEstudiantes");
                 });
 
             modelBuilder.Entity("ProyectoCF.Models.Usuario", b =>
@@ -409,6 +472,17 @@ namespace ProyectoCF.Migrations
                     b.Navigation("Evaluacion");
                 });
 
+            modelBuilder.Entity("ProyectoCF.Models.Puntaje", b =>
+                {
+                    b.HasOne("ProyectoCF.Models.Usuario", "Usuario")
+                        .WithMany("Puntajes")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("ProyectoCF.Models.Respuesta", b =>
                 {
                     b.HasOne("ProyectoCF.Models.Pregunta", "Pregunta")
@@ -418,6 +492,41 @@ namespace ProyectoCF.Migrations
                         .IsRequired();
 
                     b.Navigation("Pregunta");
+                });
+
+            modelBuilder.Entity("ProyectoCF.Models.RespuestaEstudiante", b =>
+                {
+                    b.HasOne("ProyectoCF.Models.Usuario", "Estudiante")
+                        .WithMany()
+                        .HasForeignKey("EstudianteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProyectoCF.Models.Evaluacion", "Evaluacion")
+                        .WithMany()
+                        .HasForeignKey("EvaluacionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProyectoCF.Models.Pregunta", "Pregunta")
+                        .WithMany()
+                        .HasForeignKey("PreguntaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProyectoCF.Models.Respuesta", "Respuesta")
+                        .WithMany()
+                        .HasForeignKey("RespuestaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Estudiante");
+
+                    b.Navigation("Evaluacion");
+
+                    b.Navigation("Pregunta");
+
+                    b.Navigation("Respuesta");
                 });
 
             modelBuilder.Entity("ProyectoCF.Models.Curso", b =>
@@ -433,6 +542,11 @@ namespace ProyectoCF.Migrations
             modelBuilder.Entity("ProyectoCF.Models.Pregunta", b =>
                 {
                     b.Navigation("Respuestas");
+                });
+
+            modelBuilder.Entity("ProyectoCF.Models.Usuario", b =>
+                {
+                    b.Navigation("Puntajes");
                 });
 #pragma warning restore 612, 618
         }

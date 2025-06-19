@@ -29,10 +29,11 @@ namespace ProyectoCF.Controllers
             var usuarios = _context.Usuarios.ToList();
             return View(usuarios);
         }
-
+     
         [HttpGet]
         public IActionResult Create()
         {
+
             if (!EsAccesoPermitido())
             {
                 return Forbid();

@@ -1,0 +1,78 @@
+[
+  {
+    "nivel": "Fácil",
+    "puntos": 1,
+    "texto": "¿Qué significa EPT en el contexto educativo?",
+    "opciones": [
+      {
+        "texto": "Educación para Todos",
+        "correcta": false
+      },
+      {
+        "texto": "Educación para el Trabajo",
+        "correcta": true
+      },
+      {
+        "texto": "Estudios Profesionales Técnicos",
+        "correcta": false
+      }
+    ]
+  },
+  {
+    "nivel": "Fácil",
+    "puntos": 1,
+    "texto": "¿2 + 2?",
+    "opciones": [
+      {
+        "texto": "3",
+        "correcta": false
+      },
+      {
+        "texto": "4",
+        "correcta": true
+      },
+      {
+        "texto": "5",
+        "correcta": false
+      }
+    ]
+  },
+  {
+    "nivel": "Normal",
+    "puntos": 2,
+    "texto": "¿Cuál es uno de los objetivos principales de la EPT?",
+    "opciones": [
+      {
+        "texto": "Fomentar el deporte",
+        "correcta": false
+      },
+      {
+        "texto": "Desarrollar habilidades para el mundo laboral",
+        "correcta": true
+      },
+      {
+        "texto": "Aprender idiomas",
+        "correcta": false
+      }
+    ]
+  },
+  {
+    "nivel": "Difícil",
+    "puntos": 3,
+    "texto": "¿Qué estrategia promueve la EPT para fomentar el emprendimiento?",
+    "opciones": [
+      {
+        "texto": "Implementación de talleres de poesía",
+        "correcta": false
+      },
+      {
+        "texto": "Desarrollo de proyectos productivos escolares",
+        "correcta": true
+      },
+      {
+        "texto": "Estudio de teorías filosóficas",
+        "correcta": false
+      }
+    ]
+  }
+]

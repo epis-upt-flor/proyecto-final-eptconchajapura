@@ -1,31 +1,280 @@
-﻿@model List<ProyectoCF.Models.Curso>
+﻿@{
+    ViewData["Title"] = "Chat PDF";
+}
 
-<div class="text-center mb-4">
-    <h2 class="text-lg" style="color: #bb86fc;">Cursos Asignados</h2>
+<h2>Chat con IA basado en tus PDFs</h2>
+
+<form id="upload-form" enctype="multipart/form-data" class="mb-4">
+    <input type="file" name="pdfFile" accept="application/pdf" required class="form-control mb-2" multiple />
+    <button type="submit" class="btn btn-primary" id="upload-btn">
+        <span id="upload-text">Subir PDF(s)</span>
+        <span id="upload-spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+    </button>
+</form>
+
+<div id="pdf-list" class="mb-4"></div>
+
+<div id="chat-section" style="display:none;">
+    <textarea id="question" class="form-control mb-2" placeholder="Haz tu pregunta sobre los documentos..."></textarea>
+    <button id="ask-btn" class="btn btn-success mb-3">
+        <span id="ask-text">Preguntar</span>
+        <span id="ask-spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+    </button>
+
+    <div id="response" class="mt-3 p-3 border rounded"></div>
 </div>
 
-@if (Model.Any())
-{
-    <div class="row justify-content-center">
-        @foreach (var curso in Model)
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card bg-dark text-light border-secondary h-100">
-                    <div class="card-body d-flex flex-column align-items-center">
-                        <i class="fas fa-book fa-3x mb-3" style="color: #bb86fc;"></i>
-                        <h5 class="card-title">@curso.Nombre</h5>
-                        <a asp-action="Chat" asp-route-id="@curso.Id" class="btn btn-primary mt-auto">
-                            <i class="fas fa-comments me-2"></i> Comenzar Chat
-                        </a>
-                    </div>
-                </div>
-            </div>
+@section Styles {
+    <style>
+        #response img {
+            max-width: 100%;
+            height: auto;
         }
-    </div>
+
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            overflow-x: auto;
+        }
+
+        code {
+            color: #e83e8c;
+            background-color: #f8f9fa;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+        }
+
+        blockquote {
+            border-left: 4px solid #dee2e6;
+            padding-left: 1rem;
+            margin-left: 0;
+            color: #6c757d;
+        }
+
+        .pdf-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            background-color: #f8f9fa;
+            border-radius: 0.25rem;
+        }
+
+        .pdf-item-name {
+            flex-grow: 1;
+            margin: 0 1rem;
+        }
+
+        .pdf-item-remove {
+            color: #dc3545;
+            cursor: pointer;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            min-width: 250px;
+            z-index: 1000;
+        }
+    </style>
 }
-else
-{
-    <div class="text-center">
-        <p class="text-light">No tienes cursos asignados.</p>
-    </div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script>
+        let uploadedFiles = [];
+
+        async function uploadPdfs() {
+            const uploadBtn = document.getElementById("upload-btn");
+            const uploadText = document.getElementById("upload-text");
+            const uploadSpinner = document.getElementById("upload-spinner");
+            const filesInput = document.querySelector('input[type="file"]');
+
+            if (filesInput.files.length === 0) {
+                showToast("Por favor selecciona al menos un archivo PDF.", "warning");
+                return;
+            }
+
+            uploadBtn.disabled = true;
+            uploadText.textContent = "Subiendo...";
+            uploadSpinner.classList.remove("d-none");
+
+            try {
+                for (let file of filesInput.files) {
+                    const formData = new FormData();
+                    formData.append("pdfFile", file);
+
+                    const response = await fetch("/Chat/UploadPdf", {
+                        method: "POST",
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        const error = await response.json();
+                        throw new Error(error.error || "Error al subir archivo");
+                    }
+
+                    const data = await response.json();
+                    uploadedFiles.push({
+                        id: data.fileId,
+                        name: data.fileName
+                    });
+
+                    addPdfToList(data.fileId, data.fileName);
+                }
+
+                if (uploadedFiles.length > 0) {
+                    document.getElementById("chat-section").style.display = "block";
+                    showToast("✅ PDFs subidos correctamente");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                showToast(`❌ ${error.message}`, "danger");
+            } finally {
+                uploadBtn.disabled = false;
+                uploadText.textContent = "Subir PDF(s)";
+                uploadSpinner.classList.add("d-none");
+                filesInput.value = "";
+            }
+        }
+
+        async function askQuestion() {
+            const questionInput = document.getElementById("question");
+            const message = questionInput.value.trim();
+
+            if (!message) {
+                showToast("Por favor escribe una pregunta", "warning");
+                return;
+            }
+
+            if (uploadedFiles.length === 0) {
+                showToast("Debes subir al menos un PDF primero", "warning");
+                return;
+            }
+
+            const askBtn = document.getElementById("ask-btn");
+            const askText = document.getElementById("ask-text");
+            const askSpinner = document.getElementById("ask-spinner");
+            const responseDiv = document.getElementById("response");
+
+            askBtn.disabled = true;
+            askText.textContent = "Procesando...";
+            askSpinner.classList.remove("d-none");
+            responseDiv.innerHTML = '<div class="text-center"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">Analizando documentos...</p></div>';
+
+            try {
+                const response = await fetch("/Chat/AskPdf", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        fileIds: uploadedFiles.map(f => f.id),
+                        message: message
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => null);
+                    throw new Error(errorData?.error || `Error ${response.status}`);
+                }
+
+                const data = await response.json();
+                responseDiv.innerHTML = marked.parse(data.response);
+                showToast("Respuesta generada correctamente");
+            } catch (error) {
+                console.error("Error al preguntar:", error);
+                responseDiv.innerHTML = `
+                    <div class="alert alert-danger">
+                        <strong>Error:</strong> ${error.message}
+                        ${uploadedFiles.length === 0 ? '<br>Sube al menos un PDF.' : ''}
+                    </div>
+                `;
+                showToast(`❌ ${error.message}`, "danger");
+            } finally {
+                askBtn.disabled = false;
+                askText.textContent = "Preguntar";
+                askSpinner.classList.add("d-none");
+                questionInput.focus();
+            }
+        }
+
+        function addPdfToList(fileId, fileName) {
+            const pdfList = document.getElementById("pdf-list");
+            const item = document.createElement("div");
+            item.className = "pdf-item d-flex align-items-center mb-2 p-2 bg-light rounded";
+            item.innerHTML = `
+                <i class="fa-solid fa-file-pdf text-danger me-2"></i>
+                <span class="flex-grow-1">${fileName}</span>
+                <button class="btn btn-sm btn-outline-danger" onclick="removePdf('${fileId}', this)">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            `;
+            pdfList.appendChild(item);
+        }
+
+        async function removePdf(fileId, button) {
+            if (!confirm("¿Eliminar este PDF?")) return;
+
+            try {
+                const response = await fetch("/Chat/RemovePdf", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ fileId })
+                });
+
+                if (!response.ok) throw new Error("Error al eliminar");
+
+                uploadedFiles = uploadedFiles.filter(f => f.id !== fileId);
+                button.closest(".pdf-item").remove();
+
+                if (uploadedFiles.length === 0) {
+                    document.getElementById("chat-section").style.display = "none";
+                }
+                showToast("PDF eliminado correctamente");
+            } catch (error) {
+                showToast(`Error al eliminar PDF: ${error.message}`, "danger");
+            }
+        }
+
+        function showToast(message, type = "success") {
+            const toastContainer = document.getElementById("toast-container") || document.createElement("div");
+            toastContainer.id = "toast-container";
+            toastContainer.style.position = "fixed";
+            toastContainer.style.bottom = "20px";
+            toastContainer.style.right = "20px";
+            toastContainer.style.zIndex = "1000";
+
+            const toast = document.createElement("div");
+            toast.className = `toast show align-items-center text-white bg-${type} border-0`;
+            toast.role = "alert";
+            toast.setAttribute("aria-live", "assertive");
+            toast.setAttribute("aria-atomic", "true");
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            `;
+
+            toastContainer.appendChild(toast);
+            document.body.appendChild(toastContainer);
+
+            setTimeout(() => {
+                toast.classList.remove("show");
+                setTimeout(() => toast.remove(), 300);
+            }, 5000);
+        }
+
+        document.getElementById("upload-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            uploadPdfs();
+        });
+
+        document.getElementById("ask-btn").addEventListener("click", askQuestion);
+    </script>
 }

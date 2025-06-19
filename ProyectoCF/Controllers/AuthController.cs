@@ -47,10 +47,11 @@ namespace ProyectoCF.Controllers
         [HttpGet]
         public IActionResult GoogleLogin()
         {
-            var redirectUrl = Url.Action("GoogleResponse", "Auth");
+            var redirectUrl = Url.Action("GoogleResponse", "Auth", null, Request.Scheme);
             var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
             return Challenge(properties, "Google");
         }
+
 
         [HttpGet]
         public async Task<IActionResult> GoogleResponse()

@@ -1,114 +1,170 @@
-﻿using GenerativeAI;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProyectoCF.Models;
+using System.Text;
+using System.Text.Json;
 
 namespace ProyectoCF.Controllers
 {
     [Route("Chat")]
     public class ChatController : Controller
     {
-        private readonly Connection _context;
+        private readonly IWebHostEnvironment _env;
 
-        public ChatController(Connection context)
+        public ChatController(IWebHostEnvironment env)
         {
-            _context = context;
+            _env = env;
         }
 
         [HttpGet("Index")]
         public IActionResult Index()
         {
             var rol = HttpContext.Session.GetString("Rol");
-            if (rol != "Estudiante")
-            {
-                return Forbid();
-            }
+            if (rol != "Estudiante") return Forbid();
 
-            var usuarioIdString = HttpContext.Session.GetString("UsuarioId");
-            if (string.IsNullOrEmpty(usuarioIdString)) return Unauthorized();
-
-            var usuarioId = int.Parse(usuarioIdString);
-            var cursos = _context.EstudiantesCursos
-                .Include(ec => ec.Curso)
-                .Where(ec => ec.EstudianteId == usuarioId)
-                .Select(ec => ec.Curso)
-                .ToList();
-
-            return View(cursos);
-        }
-
-        [HttpGet("Chat/{id}")]
-        public IActionResult Chat(int id)
-        {
-            var rol = HttpContext.Session.GetString("Rol");
-            if (rol != "Estudiante")
-            {
-                return Forbid();
-            }
-
-            var usuarioIdString = HttpContext.Session.GetString("UsuarioId");
-            if (string.IsNullOrEmpty(usuarioIdString)) return Unauthorized();
-
-            var usuarioId = int.Parse(usuarioIdString);
-            var curso = _context.EstudiantesCursos
-                .Include(ec => ec.Curso)
-                .FirstOrDefault(ec => ec.CursoId == id && ec.EstudianteId == usuarioId)?.Curso;
-
-            if (curso == null)
-            {
-                return NotFound();
-            }
-
-            ViewBag.Curso = curso;
             return View();
         }
 
-        [HttpPost("SendMessage")]
-        public async Task<IActionResult> SendMessage([FromBody] ChatRequest request)
+        [HttpPost("UploadPdf")]
+        public async Task<IActionResult> UploadPdf(IFormFile pdfFile)
         {
-            var rol = HttpContext.Session.GetString("Rol");
-            if (rol != "Estudiante")
-            {
-                return Forbid();
-            }
-
-            var usuarioIdString = HttpContext.Session.GetString("UsuarioId");
-            if (string.IsNullOrEmpty(usuarioIdString)) return Unauthorized();
-
-            var usuarioId = int.Parse(usuarioIdString);
-            var curso = _context.EstudiantesCursos
-                .Include(ec => ec.Curso)
-                .FirstOrDefault(ec => ec.CursoId == request.CursoId && ec.EstudianteId == usuarioId)?.Curso;
-
-            if (curso == null)
-            {
-                return NotFound();
-            }
-
-            var cursoContext = $"Curso: {curso.Nombre}\nDescripción: {curso.Descripcion}";
-
             try
             {
-                var apiKey = "AIzaSyDrw9lNttNSHH4uWCACWHj2yvB2U0phvKU";
-                var googleAI = new GoogleAi(apiKey);
-                var model = googleAI.CreateGenerativeModel("models/gemini-2.0-pro-exp-02-05");
-                var prompt = $"{cursoContext}\n\nPregunta: {request.Message}";
-                var response = await model.GenerateContentAsync(prompt);
-                var aiResponse = response.Text();
+                if (pdfFile == null || pdfFile.Length == 0)
+                    return BadRequest(new { error = "Archivo inválido o vacío." });
 
-                return Json(new { userMessage = request.Message, iaResponse = aiResponse });
+                if (Path.GetExtension(pdfFile.FileName).ToLower() != ".pdf")
+                    return BadRequest(new { error = "Solo se permiten archivos PDF." });
+
+                var uploads = Path.Combine(_env.WebRootPath, "uploads");
+                Directory.CreateDirectory(uploads);
+
+                var fileId = Guid.NewGuid().ToString();
+                var filePath = Path.Combine(uploads, fileId + ".pdf");
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await pdfFile.CopyToAsync(stream);
+                }
+
+                return Json(new
+                {
+                    fileId,
+                    fileName = pdfFile.FileName,
+                    message = "PDF subido correctamente"
+                });
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Excepción al comunicarse con Gemini: {ex.Message}");
-                return Json(new { error = "Error interno al comunicarse con la IA." });
+                return StatusCode(500, new { error = $"Error al subir PDF: {ex.Message}" });
             }
+        }
+
+        [HttpPost("AskPdf")]
+        public async Task<IActionResult> AskPdf([FromBody] PdfChatRequest request)
+        {
+            try
+            {
+                if (request?.FileIds == null || !request.FileIds.Any())
+                    return BadRequest(new { error = "No se proporcionaron IDs de archivos." });
+
+                if (string.IsNullOrWhiteSpace(request.Message))
+                    return BadRequest(new { error = "El mensaje no puede estar vacío." });
+
+                var apiKey = "AIzaSyCoiyJYcOxhL_Aeavbt4T0kSl9icIYCOiU";
+                var uploads = Path.Combine(_env.WebRootPath, "uploads");
+                var pdfParts = new List<object>();
+                var validFiles = new List<string>();
+
+                foreach (var fileId in request.FileIds)
+                {
+                    var filePath = Path.Combine(uploads, fileId + ".pdf");
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        validFiles.Add(fileId);
+                        var pdfBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+                        pdfParts.Add(new
+                        {
+                            inlineData = new
+                            {
+                                mimeType = "application/pdf",
+                                data = Convert.ToBase64String(pdfBytes)
+                            }
+                        });
+                    }
+                }
+
+                if (!pdfParts.Any())
+                    return BadRequest(new { error = "Ninguno de los PDFs existe o es accesible." });
+
+                pdfParts.Add(new { text = request.Message + " Responde en español sobre los documentos" });
+
+                var payload = new
+                {
+                    contents = new[] { new { parts = pdfParts } }
+                };
+
+                using var client = new HttpClient();
+                client.DefaultRequestHeaders.Add("x-goog-api-key", apiKey);
+
+                var response = await client.PostAsync(
+                    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
+                    new StringContent(
+                        JsonSerializer.Serialize(payload),
+                        Encoding.UTF8,
+                        "application/json"));
+
+                response.EnsureSuccessStatusCode();
+
+                var json = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<JsonDocument>(json);
+
+                return Json(new
+                {
+                    response = result.RootElement
+                        .GetProperty("candidates")[0]
+                        .GetProperty("content")
+                        .GetProperty("parts")[0]
+                        .GetProperty("text")
+                        .GetString(),
+                    filesUsados = validFiles
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    error = $"Error al procesar la solicitud: {ex.Message}",
+                    detalle = ex.StackTrace
+                });
+            }
+        }
+
+        [HttpPost("RemovePdf")]
+        public IActionResult RemovePdf([FromBody] RemovePdfRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.FileId))
+                return BadRequest("ID de archivo inválido.");
+
+            var uploads = Path.Combine(_env.WebRootPath, "uploads");
+            var filePath = Path.Combine(uploads, request.FileId + ".pdf");
+
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
+
+            return Json(new { success = true });
         }
     }
 
-    public class ChatRequest
+    public class PdfChatRequest
     {
-        public int CursoId { get; set; }
-        public string Message { get; set; }
+        public List<string>? FileIds { get; set; }
+        public string? Message { get; set; }
+    }
+
+    public class RemovePdfRequest
+    {
+        public string? FileId { get; set; }
     }
 }

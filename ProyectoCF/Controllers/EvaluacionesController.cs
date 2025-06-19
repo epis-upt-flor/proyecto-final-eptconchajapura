@@ -73,7 +73,26 @@ namespace ProyectoCF.Controllers
                     YaRendida = _context.Notas.Any(n => n.EvaluacionId == e.Id && n.EstudianteId == usuarioId)
                 }).ToList();
             }
+            var topUsuarios = _context.Puntajes?
+                .GroupBy(p => p.UsuarioId)
+                .Select(g => new
+                {
+                    UsuarioId = g.Key,
+                    PuntajeTotal = g.Sum(p => p.Valor)
+                })
+                .Join(_context.Usuarios,
+                    puntaje => puntaje.UsuarioId,
+                    usuario => usuario.Id,
+                    (puntaje, usuario) => new UsuarioPuntajeDto
+                    {
+                        Nombres = usuario.Nombre ?? "Sin nombre",
+                        PuntajeTotal = puntaje.PuntajeTotal
+                    })
+                .OrderByDescending(u => u.PuntajeTotal)
+                .Take(3)
+                .ToList() ?? new List<UsuarioPuntajeDto>();
 
+            ViewBag.TopUsuarios = topUsuarios;
             return View(evaluacionesViewModel);
         }
 
@@ -341,4 +360,10 @@ namespace ProyectoCF.Controllers
         }
 
     }
+    public class UsuarioPuntajeDto
+    {
+        public string Nombres { get; set; } = string.Empty;
+        public int PuntajeTotal { get; set; }
+    }
+
 }

@@ -49,3 +49,242 @@ else
 {
     <p class="text-center text-muted">Actualmente no tienes cursos disponibles para mostrar.</p>
 }
+
+@if (ViewBag.Rol == "Estudiante")
+{
+    <!-- Modal del Juego Diario -->
+    <div class="modal fade" id="juegoModal" tabindex="-1" aria-labelledby="juegoModalLabel" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="juegoModalLabel">Juego Diario</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <div id="ruleta-container">
+                        <canvas id="ruletaCanvas" width="300" height="300"></canvas>
+                    </div>
+
+                    <div id="pregunta-container" class="mt-4 d-none">
+                        <div class="badge mb-3" id="nivel-badge"></div>
+                        <div class="card bg-secondary text-light mb-3">
+                            <div class="card-body">
+                                <h5 id="texto-pregunta" class="mb-0"></h5>
+                            </div>
+                        </div>
+                        <div id="opciones-container" class="d-grid gap-2"></div>
+                    </div>
+
+                    <div id="resultado-container" class="d-none">
+                        <div class="alert" id="resultado-alert">
+                            <h4 id="resultado-texto" class="alert-heading"></h4>
+                            <p id="puntos-texto" class="mb-0"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" id="btn-girar" class="btn btn-primary">
+                        <i class="fas fa-redo me-2"></i>Girar Ruleta
+                    </button>
+                    <button type="button" id="btn-cerrar" class="btn btn-secondary" data-bs-dismiss="modal" style="display:none;">
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+    <script>
+        class Ruleta {
+            constructor(canvasId) {
+                this.canvas = document.getElementById(canvasId);
+                this.ctx = this.canvas.getContext('2d');
+                this.secciones = ['Fácil', 'Normal', 'Difícil'];
+                this.colores = ['#4CAF50', '#2196F3', '#F44336'];
+                this.angulo = 0;
+                this.girando = false;
+
+                this.dibujar();
+            }
+
+            dibujar() {
+                const { ctx, canvas, secciones, colores } = this;
+                const radio = canvas.width / 2;
+                const anguloSeccion = (2 * Math.PI) / secciones.length;
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                secciones.forEach((seccion, i) => {
+                    ctx.beginPath();
+                    ctx.fillStyle = colores[i];
+                    ctx.moveTo(radio, radio);
+                    ctx.arc(radio, radio, radio, i * anguloSeccion, (i + 1) * anguloSeccion);
+                    ctx.fill();
+
+                    ctx.save();
+                    ctx.translate(radio, radio);
+                    ctx.rotate(i * anguloSeccion + anguloSeccion / 2);
+                    ctx.textAlign = 'right';
+                    ctx.fillStyle = '#fff';
+                    ctx.font = '16px Arial';
+                    ctx.fillText(seccion, radio - 10, 5);
+                    ctx.restore();
+                });
+
+                // Flecha indicador
+                ctx.beginPath();
+                ctx.fillStyle = '#bb86fc';
+                ctx.moveTo(radio * 2 - 10, radio - 5);
+                ctx.lineTo(radio * 2 - 10, radio + 5);
+                ctx.lineTo(radio * 2, radio);
+                ctx.fill();
+            }
+
+            girar() {
+                return new Promise((resolve) => {
+                    if (this.girando) return;
+
+                    this.girando = true;
+                    const duracion = 3000;
+                    const startTime = Date.now();
+                    const vueltas = 5 + Math.random() * 3;
+
+                    const animar = () => {
+                        const elapsed = Date.now() - startTime;
+                        const progress = Math.min(elapsed / duracion, 1);
+                        const easing = Math.sin(progress * Math.PI / 2);
+
+                        this.angulo = easing * vueltas * Math.PI * 2;
+                        this.dibujar();
+
+                        this.canvas.style.transform = `rotate(${this.angulo}rad)`;
+
+                        if (progress < 1) {
+                            requestAnimationFrame(animar);
+                        } else {
+                            this.girando = false;
+
+                            const anguloNormalized = (this.angulo + (Math.PI / this.secciones.length)) % (2 * Math.PI);
+                            const seccionIndex = Math.floor(anguloNormalized / (2 * Math.PI / this.secciones.length));
+                            const resultado = this.secciones[(this.secciones.length - 1 - seccionIndex + this.secciones.length) % this.secciones.length];
+
+                            this.canvas.style.transform = 'rotate(0rad)';
+
+                            resolve(resultado);
+                        }
+                    };
+
+                    requestAnimationFrame(animar);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log("Script cargado correctamente ✅");
+            const ruleta = new Ruleta('ruletaCanvas');
+            const btnGirar = document.getElementById('btn-girar');
+            const btnCerrar = document.getElementById('btn-cerrar');
+
+            // Verificar si ya jugó hoy
+            checkDailyGame();
+
+            function checkDailyGame() {
+                fetch('/Puntaje/VerificarJuegoHoy', {
+                    method: 'GET',
+                    credentials: 'include'  // para enviar cookies/session
+                })
+                    .then(response => {
+                        if (!response.ok) throw new Error('Error en la verificación');
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (!data.yaJugoHoy) {
+                            const modal = new bootstrap.Modal(document.getElementById('juegoModal'));
+                            modal.show();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al verificar juego:', error);
+                    });
+            }
+
+            btnGirar.addEventListener('click', async function () {
+                this.disabled = true;
+
+                try {
+                    const nivel = await ruleta.girar();
+
+                    setTimeout(async () => {
+                        const response = await fetch(`/Puntaje/ObtenerPregunta?nivel=${encodeURIComponent(nivel)}`);
+                        if (!response.ok) throw new Error('Error al obtener pregunta');
+
+                        const pregunta = await response.json();
+                        mostrarPregunta(pregunta, nivel);
+                    }, 100);
+                } catch (error) {
+                    console.error('Error al girar ruleta:', error);
+                    btnGirar.disabled = false;
+                }
+            });
+
+            function mostrarPregunta(pregunta, nivel) {
+                document.getElementById('ruleta-container').classList.add('d-none');
+                const preguntaContainer = document.getElementById('pregunta-container');
+                preguntaContainer.classList.remove('d-none');
+
+                const nivelBadge = document.getElementById('nivel-badge');
+                nivelBadge.textContent = nivel;
+                nivelBadge.style.backgroundColor =
+                    nivel === 'Fácil' ? '#4CAF50' :
+                        nivel === 'Normal' ? '#2196F3' : '#F44336';
+
+                // Usar mayúsculas y minúsculas según el JSON que muestras:
+                document.getElementById('texto-pregunta').textContent = pregunta.texto;
+
+                const opcionesContainer = document.getElementById('opciones-container');
+                opcionesContainer.innerHTML = '';
+
+                pregunta.opciones.forEach(opcion => {
+                    const btn = document.createElement('button');
+                    btn.className = 'btn btn-outline-light py-2';
+                    btn.textContent = opcion.texto;
+                    btn.addEventListener('click', () => verificarRespuesta(opcion.correcta, pregunta.puntos));
+                    opcionesContainer.appendChild(btn);
+                });
+            }
+
+            function verificarRespuesta(esCorrecta, puntos) {
+                const puntosGanados = esCorrecta ? puntos : 0;
+
+                document.getElementById('pregunta-container').classList.add('d-none');
+                const resultadoContainer = document.getElementById('resultado-container');
+                resultadoContainer.classList.remove('d-none');
+
+                const alert = document.getElementById('resultado-alert');
+                alert.className = esCorrecta ? 'alert alert-success' : 'alert alert-danger';
+
+                document.getElementById('resultado-texto').textContent =
+                    esCorrecta ? '¡Respuesta Correcta!' : 'Respuesta Incorrecta';
+                document.getElementById('puntos-texto').textContent =
+                    `Has ganado ${puntosGanados} punto(s)`;
+
+                btnGirar.style.display = 'none';
+                btnCerrar.style.display = 'block';
+
+                fetch('/Puntaje/GuardarPuntaje', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ valor: puntosGanados })
+                }).catch(error => console.error('Error al guardar puntaje:', error));
+            }
+
+            btnCerrar.addEventListener('click', function () {
+                const modal = bootstrap.Modal.getInstance(document.getElementById('juegoModal'));
+                modal.hide();
+            });
+        });
+    </script>
+    }
+
+}

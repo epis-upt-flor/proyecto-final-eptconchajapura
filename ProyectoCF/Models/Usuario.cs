@@ -25,6 +25,8 @@ namespace ProyectoCF.Models
 
         [Required]
         public required string Rol { get; set; }
+        public virtual ICollection<Puntaje> Puntajes { get; set; }
+
     }
 
 }

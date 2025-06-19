@@ -54,7 +54,10 @@
 
 @foreach (var material in Model)
 {
-    var entregas = ViewBag.EntregasPorMaterial?[material.Id] as List<ProyectoCF.Models.Entregable>;
+    var entregas = ViewBag.EntregasPorMaterial != null && ViewBag.EntregasPorMaterial.ContainsKey(material.Id)
+    ? ViewBag.EntregasPorMaterial[material.Id] as List<ProyectoCF.Models.Entregable>
+    : new List<ProyectoCF.Models.Entregable>();
+
 
     if (entregas != null && entregas.Any())
     {

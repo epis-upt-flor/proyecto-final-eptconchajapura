@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "Juegos Educativos";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+    
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="game-container mb-4 p-3 border rounded bg-light">
+                @Html.Raw(ViewBag.Juegos[ViewBag.JuegoActual])
+            </div>
+            
+            <div class="navigation-controls text-center">
+                <a asp-action="Index" asp-route-juegoId="@(ViewBag.JuegoActual - 1)" 
+                   class="btn btn-primary @(ViewBag.JuegoActual == 0 ? "disabled" : "")">
+                    <i class="fas fa-arrow-left"></i> Anterior
+                </a>
+                
+                <span class="mx-3">
+                    Juego @(ViewBag.JuegoActual + 1) de @ViewBag.TotalJuegos
+                </span>
+                
+                <a asp-action="Index" asp-route-juegoId="@(ViewBag.JuegoActual + 1)" 
+                   class="btn btn-primary @(ViewBag.JuegoActual == ViewBag.TotalJuegos - 1 ? "disabled" : "")">
+                    Siguiente <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="quick-select mt-3 text-center">
+                @for (int i = 0; i < ViewBag.TotalJuegos; i++)
+                {
+                    <a asp-action="Index" asp-route-juegoId="@i" 
+                       class="btn btn-sm @(i == ViewBag.JuegoActual ? "btn-success" : "btn-outline-secondary") mx-1">
+                        @(i + 1)
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .game-container {
+        min-height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .navigation-controls {
+        margin-bottom: 20px;
+    }
+    
+    .quick-select {
+        margin-top: 15px;
+    }
+</style>
