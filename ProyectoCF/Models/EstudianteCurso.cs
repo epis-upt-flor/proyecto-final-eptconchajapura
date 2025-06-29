@@ -15,9 +15,9 @@ namespace ProyectoCF.Models
         public int CursoId { get; set; }
 
         [ForeignKey("EstudianteId")]
-        public Usuario Estudiante { get; set; }
+        public Usuario? Estudiante { get; set; } // <- ahora acepta null
 
         [ForeignKey("CursoId")]
-        public Curso Curso { get; set; }
+        public Curso? Curso { get; set; } // <- ahora acepta null
     }
 }

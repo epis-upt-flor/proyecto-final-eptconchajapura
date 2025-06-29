@@ -1,0 +1,115 @@
+:root {
+    --color-bg: #0d1b2a;
+    --color-bg-light: #1f1f1f;
+    --color-accent: #bb86fc;
+    --color-text: #ffffff;
+    --color-muted: #cfcfcf;
+}
+
+body {
+    background-color: var(--color-bg);
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-text);
+}
+
+h1.display-4, h2, h5.card-title {
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+.badge {
+    font-size: 1rem;
+    padding: 0.5em 1em;
+    border-radius: 12px;
+}
+
+.table-dark {
+    background-color: #1a1a2e;
+    color: #fff;
+}
+
+    .table-dark thead {
+        background-color: var(--color-accent);
+        color: var(--color-bg);
+    }
+
+    .table-dark tbody tr:hover {
+        background-color: #2a2a40;
+    }
+
+.btn {
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-outline-info:hover {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-outline-success:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-outline-warning:hover {
+    background-color: #ffc107;
+    color: black;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+.card {
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out;
+}
+
+    .card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
+    }
+
+.card-body i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-custom {
+    background-color: var(--color-bg-light);
+    border: 1px solid #333;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+    .card-custom:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+    }
+
+    .card-custom .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-custom h5 {
+        margin-bottom: 0.75rem;
+    }
+
+.logout-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+@media (max-width: 768px) {
+    .card-custom {
+        margin-bottom: 1.5rem;
+    }
+}

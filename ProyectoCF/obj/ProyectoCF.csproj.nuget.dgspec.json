@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/home/josue/Documentos/Despliege-ProyectoCF/ProyectoCF.csproj": {}
+    "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\ProyectoCF.csproj": {}
   },
   "projects": {
-    "/home/josue/Documentos/Despliege-ProyectoCF/ProyectoCF.csproj": {
+    "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\ProyectoCF.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/josue/Documentos/Despliege-ProyectoCF/ProyectoCF.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\ProyectoCF.csproj",
         "projectName": "ProyectoCF",
-        "projectPath": "/home/josue/Documentos/Despliege-ProyectoCF/ProyectoCF.csproj",
-        "packagesPath": "/home/josue/.nuget/packages/",
-        "outputPath": "/home/josue/Documentos/Despliege-ProyectoCF/obj/",
+        "projectPath": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\ProyectoCF.csproj",
+        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/josue/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -60,7 +66,7 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[9.0.6, )"
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
@@ -98,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,63 +1,134 @@
-﻿body {
-    background-color: #0d1b2a;
-    color: #ced4da;
-    font-family: Arial, sans-serif;
+﻿* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.logo-container {
+body {
+    background-color: #023059; /* Fondo actualizado a color institucional */
+    font-family: 'Poppins', sans-serif;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 2em;
+    background: linear-gradient(45deg, #035AA6, #023059); /* Fondo degradado institucional */
+    border-radius: 25px;
+    transition: background 0.6s ease; /* Transición suave */
+    color: #F2F2F2;
+}
+
+    .form:hover {
+        background: linear-gradient(45deg, #731022, #035AA6); /* Cambio al hacer hover */
+    }
+
+.card {
+    background: linear-gradient(163deg, #035AA6, #035AA6); /* Borde con color institucional */
+    padding: 2px; /* Espacio para mostrar el borde */
+    border-radius: 22px;
+    transition: all 0.3s;
+}
+
+.card2 {
+    border-radius: 20px;
+    background-color: #171717;
+    transition: all 0.2s;
+}
+
+    .card2:hover {
+        transform: scale(0.98);
+    }
+
+.card:hover {
+    box-shadow: 0 0 30px 2px rgba(3, 90, 166, 0.4); /* Luz azul institucional */
+}
+
+#heading {
     text-align: center;
-    margin-top: 5rem;
+    margin: 2em 0 1em;
+    color: rgb(255, 255, 255);
+    font-size: 1.4em;
+    font-weight: 600;
 }
 
-    .logo-container img {
-        width: 150px;
-        height: auto;
-    }
-
-    .logo-container h1 {
-        color: #bb86fc;
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-    }
-
-.form-container {
-    background-color: #162447;
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    margin-top: 2rem;
+.field {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    border-radius: 25px;
+    padding: 0.6em 1em;
+    background-color: #171717;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
 }
 
-h2 {
-    color: #bb86fc;
+.input-icon {
+    height: 1.3em;
+    width: 1.3em;
+    fill: white;
 }
 
-label {
-    color: #ced4da;
-}
-
-input.form-control {
-    background-color: #1c2b3f;
-    color: #ced4da;
-    border: 1px solid #333;
-}
-
-    input.form-control:focus {
-        border-color: #bb86fc;
-        box-shadow: 0 0 5px rgba(187, 134, 252, 0.5);
-    }
-
-button.btn-primary {
-    background-color: #bb86fc;
+.input-field {
+    background: none;
     border: none;
+    outline: none;
+    width: 100%;
+    color: #d3d3d3;
+    font-size: 0.9em;
 }
 
-    button.btn-primary:hover {
-        background-color: #9c6ade;
+.form .btn {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 2em;
+    gap: 1em;
+}
+
+.button1, .button2, .button3 {
+    padding: 0.5em 1.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    background-color: #252525;
+    color: white;
+    transition: 0.4s ease-in-out;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+    .button1:hover, .button2:hover {
+        background-color: black;
     }
 
-.alert-danger {
-    background-color: #451a1a;
-    color: #ffcccc;
-    border: 1px solid #6b2e2e;
+.button3 {
+    margin-top: 1em;
+    margin-bottom: 2em;
+    display: block;
+    width: 100%;
+}
+
+    .button3:hover {
+        background-color: red;
+        color: white;
+    }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #023059, #035AA6, #731022, #A60303);
+    background-size: 400% 400%;
+    animation: fondoAnimado 15s ease infinite;
+}
+@keyframes fondoAnimado {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }

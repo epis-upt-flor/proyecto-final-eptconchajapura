@@ -1,42 +1,81 @@
 @model ProyectoCF.Models.Curso
 
-<h2>Editar Curso</h2>
+<!-- CSS reutilizado -->
+<link rel="stylesheet" href="~/css/cursos.css" />
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" name="Id" value="@Model.Id" />
-
-    <div class="form-group">
-        <label for="Nombre">Nombre</label>
-        <input type="text" name="Nombre" class="form-control" value="@Model.Nombre" required />
-    </div>
-
-    <div class="form-group">
-        <label for="Descripcion">Descripción</label>
-        <textarea name="Descripcion" class="form-control">@Model.Descripcion</textarea>
-    </div>
-
-    @if (ViewBag.Rol == "Administrador")
-    {
-        <div class="form-group">
-            <label for="DocenteId">Docente</label>
-            <select name="DocenteId" class="form-control" required>
-                @if (ViewBag.Docentes != null)
-                {
-                    @foreach (var docente in (List<ProyectoCF.Models.Usuario>)ViewBag.Docentes)
-                    {
-                        <option value="@docente.Id"
-                                selected="@(Model.DocenteId == docente.Id ? "selected" : null)">
-                            @docente.Nombre @docente.Apellido
-                        </option>
-                    }
-                }
-            </select>
+<div class="container mt-4 mb-5">
+    <div class="card bg-dark text-white shadow-lg p-4 rounded">
+        <div class="text-center mb-4">
+            <h2 class="text-lg" style="color: #bb86fc;">Editar Curso</h2>
         </div>
-    }
-    else
-    {
-        <input type="hidden" name="DocenteId" value="@Model.DocenteId" />
-    }
 
-    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
-</form>
+        <form asp-action="Edit" method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+
+            <div class="mb-3">
+                <label for="Nombre" class="form-label">Nombre del Curso</label>
+                <input type="text" name="Nombre" class="form-control bg-dark text-white border-purple" value="@Model.Nombre" required />
+            </div>
+
+            <div class="mb-3">
+                <label for="Descripcion" class="form-label">Descripción</label>
+                <textarea name="Descripcion" rows="3" class="form-control bg-dark text-white border-purple">@Model.Descripcion</textarea>
+            </div>
+
+            @if (ViewBag.Rol == "Administrador")
+            {
+                <div class="mb-3">
+                    <label for="DocenteId" class="form-label">Docente Asignado</label>
+                    <select name="DocenteId" class="form-select bg-dark text-white border-purple" required>
+                        <option disabled>Seleccione un docente</option>
+                        @foreach (var docente in (List<ProyectoCF.Models.Usuario>)ViewBag.Docentes)
+                        {
+                            <option value="@docente.Id" selected="@(Model.DocenteId == docente.Id ? "selected" : null)">
+                                @docente.Nombre @docente.Apellido
+                            </option>
+                        }
+                    </select>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" name="DocenteId" value="@Model.DocenteId" />
+            }
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-create">
+                    <i class="fas fa-save me-2"></i> Guardar Cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .border-purple {
+            border: 1px solid #bb86fc;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #bb86fc;
+            box-shadow: 0 0 0 0.2rem rgba(187, 134, 252, 0.25);
+        }
+
+        .btn-create {
+            background-color: #bb86fc;
+            color: #121212;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+            .btn-create:hover {
+                background-color: #a76efb;
+                transform: scale(1.05);
+            }
+    </style>
+}

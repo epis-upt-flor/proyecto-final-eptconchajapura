@@ -1,36 +1,87 @@
 @model ProyectoCF.Models.Material
 
-<h2>Editar Material</h2>
+<!-- CSS principal del sistema -->
+<link rel="stylesheet" href="~/css/cursos.css" />
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" name="Id" value="@Model.Id" />
-    <div class="form-group">
-        <label for="Titulo">Título</label>
-        <input type="text" name="Titulo" class="form-control" value="@Model.Titulo" required />
+<div class="container mt-4 mb-5">
+    <div class="card bg-dark text-white shadow-lg p-4 rounded">
+        <div class="text-center mb-4">
+            <h2 class="text-lg" style="color: #bb86fc;">
+                <i class="fas fa-edit me-2"></i>Editar Material
+            </h2>
+        </div>
+
+        <form asp-action="Edit" method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+
+            <div class="mb-3">
+                <label for="Titulo" class="form-label">Título</label>
+                <input type="text" name="Titulo" id="Titulo"
+                       class="form-control bg-dark text-white border-purple"
+                       value="@Model.Titulo" required placeholder="Ej: Introducción al curso" />
+            </div>
+
+            <div class="mb-3">
+                <label for="Descripcion" class="form-label">Descripción</label>
+                <textarea name="Descripcion" id="Descripcion"
+                          class="form-control bg-dark text-white border-purple"
+                          rows="3" placeholder="Escribe una breve descripción del material...">@Model.Descripcion</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="ArchivoUrl" class="form-label">URL del Archivo</label>
+                <input type="url" name="ArchivoUrl" id="ArchivoUrl"
+                       class="form-control bg-dark text-white border-purple"
+                       value="@Model.ArchivoUrl" placeholder="https://tuservidor.com/material.pdf" />
+            </div>
+
+            <div class="mb-3">
+                <label for="CursoId" class="form-label">Curso Asociado</label>
+                <select name="CursoId" id="CursoId"
+                        class="form-select bg-dark text-white border-purple" required>
+                    @foreach (var curso in (List<ProyectoCF.Models.Curso>)ViewBag.Cursos)
+                    {
+                        <option value="@curso.Id" selected="@(curso.Id == Model.CursoId ? "selected" : null)">
+                            @curso.Nombre
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-create">
+                    <i class="fas fa-save me-2"></i> Guardar Cambios
+                </button>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="Descripcion">Descripción</label>
-        <textarea name="Descripcion" class="form-control">@Model.Descripcion</textarea>
-    </div>
-    <div class="form-group">
-        <label for="ArchivoUrl">Archivo URL</label>
-        <input type="text" name="ArchivoUrl" class="form-control" value="@Model.ArchivoUrl" />
-    </div>
-    <div class="form-group">
-        <label for="CursoId">Curso</label>
-        <select name="CursoId" class="form-control">
-            @foreach (var curso in (List<ProyectoCF.Models.Curso>)ViewBag.Cursos)
-            {
-                if (curso.Id == Model.CursoId)
-                {
-                    <option value="@curso.Id" selected="selected">@curso.Nombre</option>
-                }
-                else
-                {
-                    <option value="@curso.Id">@curso.Nombre</option>
-                }
+</div>
+
+@section Styles {
+    <style>
+        .border-purple {
+            border: 1px solid #bb86fc;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #bb86fc;
+            box-shadow: 0 0 0 0.2rem rgba(187, 134, 252, 0.25);
+        }
+
+        .btn-create {
+            background-color: #bb86fc;
+            color: #121212;
+            border: none;
+            padding: 10px 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+            .btn-create:hover {
+                background-color: #9a67ea;
+                transform: scale(1.05);
             }
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
-</form>
+    </style>
+}

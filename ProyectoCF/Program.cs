@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProyectoCF.Models;
 using ProyectoCF.Services;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +12,15 @@ builder.Services.AddHttpClient();
 builder.Services.AddDbContext<Connection>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
-        new MySqlServerVersion(new Version(10, 5, 26))
+        new MySqlServerVersion(new Version(10, 5, 26)),
+        mySqlOptions =>
+        {
+            mySqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null); // Reintenta 5 veces
+            mySqlOptions.CommandTimeout(60); // Tiempo máximo de ejecución: 60 segundos
+        }
     )
 );
+
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -21,6 +28,12 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddControllersWithViews()
+.AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 });
 
 builder.Services.AddAuthentication(options =>
@@ -78,5 +91,6 @@ app.UseEndpoints(endpoints =>
 
     endpoints.MapControllers();
 });
+
 
 app.Run();

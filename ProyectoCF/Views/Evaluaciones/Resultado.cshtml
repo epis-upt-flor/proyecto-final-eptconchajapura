@@ -2,6 +2,24 @@
     ViewData["Title"] = "Resultado de la Evaluación";
 }
 
-<h2>Resultado de la Evaluación</h2>
-<p>@ViewBag.Resultado</p>
-<a asp-action="Index" class="btn btn-secondary">Volver a Evaluaciones</a>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-success text-white text-center">
+                    <h3 class="mb-0"><i class="fas fa-chart-line mr-2"></i>Resultado de la Evaluación</h3>
+                </div>
+                <div class="card-body text-center">
+                    <p class="lead mb-4">@ViewBag.Resultado</p>
+
+                    <a asp-action="Index" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-arrow-left mr-2"></i>Volver a Evaluaciones
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

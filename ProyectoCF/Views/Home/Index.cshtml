@@ -1,290 +1,157 @@
 ﻿@{
+    Layout = null;
     ViewData["Title"] = "Home Page";
 }
-<div class="text-center mb-5">
-    <h1 class="display-4" style="color: #bb86fc;">Bienvenido a ProyectoCF</h1>
-    <p class="lead text-light">Tu rol es: <strong>@ViewBag.Rol</strong></p>
-</div>
 
-@if (ViewBag.Rol == "Docente" || ViewBag.Rol == "Estudiante")
-{
-    <h2 class="text-center text-md mt-4 mb-3" style="color: #bb86fc;">Tus Cursos</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Aula Virtual Champagnat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    @if (ViewBag.Cursos != null && ((IEnumerable<dynamic>)ViewBag.Cursos).Any())
-    {
-        <div class="table-responsive">
-            <table class="table table-dark table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Docente</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var curso in ViewBag.Cursos)
-                    {
-                        <tr>
-                            <td>@curso.Nombre</td>
-                            <td>@curso.Descripcion</td>
-                            <td>@curso.DocenteNombre</td>
-                            <td>
-                                <a asp-action="Details" asp-controller="Cursos" asp-route-id="@curso.Id" class="btn btn-info btn-sm">
-                                    <i class="fas fa-eye me-1"></i> Ver Material
-                                </a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    }
-    else
-    {
-        <p class="text-center text-muted">No tienes cursos asignados actualmente.</p>
-    }
-}
-else
-{
-    <p class="text-center text-muted">Actualmente no tienes cursos disponibles para mostrar.</p>
-}
+    <!-- Bootstrap y FontAwesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
 
-@if (ViewBag.Rol == "Estudiante")
-{
-    <!-- Modal del Juego Diario -->
-    <div class="modal fade" id="juegoModal" tabindex="-1" aria-labelledby="juegoModalLabel" aria-hidden="true" data-bs-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark text-light">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title" id="juegoModalLabel">Juego Diario</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center py-4">
-                    <div id="ruleta-container">
-                        <canvas id="ruletaCanvas" width="300" height="300"></canvas>
-                    </div>
-
-                    <div id="pregunta-container" class="mt-4 d-none">
-                        <div class="badge mb-3" id="nivel-badge"></div>
-                        <div class="card bg-secondary text-light mb-3">
-                            <div class="card-body">
-                                <h5 id="texto-pregunta" class="mb-0"></h5>
-                            </div>
-                        </div>
-                        <div id="opciones-container" class="d-grid gap-2"></div>
-                    </div>
-
-                    <div id="resultado-container" class="d-none">
-                        <div class="alert" id="resultado-alert">
-                            <h4 id="resultado-texto" class="alert-heading"></h4>
-                            <p id="puntos-texto" class="mb-0"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" id="btn-girar" class="btn btn-primary">
-                        <i class="fas fa-redo me-2"></i>Girar Ruleta
-                    </button>
-                    <button type="button" id="btn-cerrar" class="btn btn-secondary" data-bs-dismiss="modal" style="display:none;">
-                        Cerrar
-                    </button>
-                </div>
-            </div>
-        </div>
+    <!-- Estilos personalizados -->
+    <link href="~/css/admin.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Encabezado institucional del colegio -->
+    <div class="bg-dark py-3 text-center border-bottom border-light">
+        <img src="~/css/logo.png" alt="Logo Champagnat" style="height: 80px;" class="mb-2" />
+        <h2 class="text-white mb-0" style="font-weight: 600;">Institución Educativa</h2>
+        <h1 class="text-white fw-bold" style="font-family: 'Poppins', cursive;">“Champagnat”</h1>
+        <p class="text-light mb-0">Tacna - Perú</p>
     </div>
+    <!-- Botón Salir fijo -->
+    <form asp-controller="Auth" asp-action="Logout" method="post" class="logout-btn">
+        <button type="submit" class="btn btn-danger">
+            <i class="fas fa-sign-out-alt"></i> Salir
+        </button>
+    </form>
 
-    @section Scripts {
-    <script>
-        class Ruleta {
-            constructor(canvasId) {
-                this.canvas = document.getElementById(canvasId);
-                this.ctx = this.canvas.getContext('2d');
-                this.secciones = ['Fácil', 'Normal', 'Difícil'];
-                this.colores = ['#4CAF50', '#2196F3', '#F44336'];
-                this.angulo = 0;
-                this.girando = false;
+    <div class="container my-5">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-light">
+                Bienvenido al <span style="color: #bb86fc;">Aula Virtual</span><br />
+                <span style="font-size: 28px; color: #ffffff;">Colegio Champagnat – Tacna</span>
+            </h1>
 
-                this.dibujar();
+            <p class="lead text-light">
+                Tu rol es:
+                <span class="badge bg-primary fs-6">@ViewBag.Rol</span>
+            </p>
+        </div>
+
+        @if (ViewBag.Rol == "Docente" || ViewBag.Rol == "Estudiante")
+        {
+            <h2 class="text-center mb-4 text-light">Tus Cursos</h2>
+
+            @if (ViewBag.Cursos != null && ((IEnumerable<dynamic>)ViewBag.Cursos).Any())
+            {
+                <div class="table-responsive shadow rounded-3">
+                    <table class="table table-dark table-striped table-hover align-middle mb-0">
+                        <thead class="table-primary text-center">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Docente</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var curso in ViewBag.Cursos)
+                            {
+                                <tr>
+                                    <td>@curso.Nombre</td>
+                                    <td>@curso.Descripcion</td>
+                                    <td>@curso.DocenteNombre</td>
+                                    <td class="text-center">
+                                        <a asp-controller="Cursos" asp-action="Details" asp-route-id="@curso.Id" class="btn btn-outline-info btn-sm">
+                                            <i class="fas fa-eye me-1"></i> Ver Material
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             }
-
-            dibujar() {
-                const { ctx, canvas, secciones, colores } = this;
-                const radio = canvas.width / 2;
-                const anguloSeccion = (2 * Math.PI) / secciones.length;
-
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                secciones.forEach((seccion, i) => {
-                    ctx.beginPath();
-                    ctx.fillStyle = colores[i];
-                    ctx.moveTo(radio, radio);
-                    ctx.arc(radio, radio, radio, i * anguloSeccion, (i + 1) * anguloSeccion);
-                    ctx.fill();
-
-                    ctx.save();
-                    ctx.translate(radio, radio);
-                    ctx.rotate(i * anguloSeccion + anguloSeccion / 2);
-                    ctx.textAlign = 'right';
-                    ctx.fillStyle = '#fff';
-                    ctx.font = '16px Arial';
-                    ctx.fillText(seccion, radio - 10, 5);
-                    ctx.restore();
-                });
-
-                // Flecha indicador
-                ctx.beginPath();
-                ctx.fillStyle = '#bb86fc';
-                ctx.moveTo(radio * 2 - 10, radio - 5);
-                ctx.lineTo(radio * 2 - 10, radio + 5);
-                ctx.lineTo(radio * 2, radio);
-                ctx.fill();
-            }
-
-            girar() {
-                return new Promise((resolve) => {
-                    if (this.girando) return;
-
-                    this.girando = true;
-                    const duracion = 3000;
-                    const startTime = Date.now();
-                    const vueltas = 5 + Math.random() * 3;
-
-                    const animar = () => {
-                        const elapsed = Date.now() - startTime;
-                        const progress = Math.min(elapsed / duracion, 1);
-                        const easing = Math.sin(progress * Math.PI / 2);
-
-                        this.angulo = easing * vueltas * Math.PI * 2;
-                        this.dibujar();
-
-                        this.canvas.style.transform = `rotate(${this.angulo}rad)`;
-
-                        if (progress < 1) {
-                            requestAnimationFrame(animar);
-                        } else {
-                            this.girando = false;
-
-                            const anguloNormalized = (this.angulo + (Math.PI / this.secciones.length)) % (2 * Math.PI);
-                            const seccionIndex = Math.floor(anguloNormalized / (2 * Math.PI / this.secciones.length));
-                            const resultado = this.secciones[(this.secciones.length - 1 - seccionIndex + this.secciones.length) % this.secciones.length];
-
-                            this.canvas.style.transform = 'rotate(0rad)';
-
-                            resolve(resultado);
-                        }
-                    };
-
-                    requestAnimationFrame(animar);
-                });
+            else
+            {
+                <p class="text-center text-muted mt-4">No tienes cursos asignados actualmente.</p>
             }
         }
+        else if (ViewBag.Rol == "Administrador")
+        {
+            <h2 class="text-center mb-4 text-light">Panel Administrativo</h2>
 
-        document.addEventListener('DOMContentLoaded', function () {
-            console.log("Script cargado correctamente ✅");
-            const ruleta = new Ruleta('ruletaCanvas');
-            const btnGirar = document.getElementById('btn-girar');
-            const btnCerrar = document.getElementById('btn-cerrar');
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="card card-custom text-light h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-users fa-2x mb-3 text-info"></i>
+                            <h5 class="card-title">Usuarios</h5>
+                            <a asp-controller="Usuarios" asp-action="Index" class="btn btn-outline-info btn-sm mt-2">Gestionar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom text-light h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-book fa-2x mb-3 text-success"></i>
+                            <h5 class="card-title">Cursos</h5>
+                            <a asp-controller="Cursos" asp-action="Index" class="btn btn-outline-success btn-sm mt-2">Ver Cursos</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom text-light h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-file-alt fa-2x mb-3 text-warning"></i>
+                            <h5 class="card-title">Materiales</h5>
+                            <a asp-controller="Materiales" asp-action="Index" class="btn btn-outline-warning btn-sm mt-2">Ver</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom text-light h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-tasks fa-2x mb-3 text-danger"></i>
+                            <h5 class="card-title">Asignaciones</h5>
+                            <a asp-controller="EstudiantesCursos" asp-action="Index" class="btn btn-outline-danger btn-sm mt-2">Ver</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom text-light h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-clipboard-check fa-2x mb-3 text-secondary"></i>
+                            <h5 class="card-title">Evaluaciones</h5>
+                            <a asp-controller="Evaluaciones" asp-action="Index" class="btn btn-outline-secondary btn-sm mt-2">Ver</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom text-light h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-gamepad fa-2x mb-3 text-info"></i>
+                            <h5 class="card-title">Juegos</h5>
+                            <a asp-controller="Juegos" asp-action="Index" class="btn btn-outline-info btn-sm mt-2">Ver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p class="text-center text-muted">Actualmente no tienes cursos disponibles para mostrar.</p>
+        }
+    </div>
 
-            // Verificar si ya jugó hoy
-            checkDailyGame();
-
-            function checkDailyGame() {
-                fetch('/Puntaje/VerificarJuegoHoy', {
-                    method: 'GET',
-                    credentials: 'include'  // para enviar cookies/session
-                })
-                    .then(response => {
-                        if (!response.ok) throw new Error('Error en la verificación');
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (!data.yaJugoHoy) {
-                            const modal = new bootstrap.Modal(document.getElementById('juegoModal'));
-                            modal.show();
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error al verificar juego:', error);
-                    });
-            }
-
-            btnGirar.addEventListener('click', async function () {
-                this.disabled = true;
-
-                try {
-                    const nivel = await ruleta.girar();
-
-                    setTimeout(async () => {
-                        const response = await fetch(`/Puntaje/ObtenerPregunta?nivel=${encodeURIComponent(nivel)}`);
-                        if (!response.ok) throw new Error('Error al obtener pregunta');
-
-                        const pregunta = await response.json();
-                        mostrarPregunta(pregunta, nivel);
-                    }, 100);
-                } catch (error) {
-                    console.error('Error al girar ruleta:', error);
-                    btnGirar.disabled = false;
-                }
-            });
-
-            function mostrarPregunta(pregunta, nivel) {
-                document.getElementById('ruleta-container').classList.add('d-none');
-                const preguntaContainer = document.getElementById('pregunta-container');
-                preguntaContainer.classList.remove('d-none');
-
-                const nivelBadge = document.getElementById('nivel-badge');
-                nivelBadge.textContent = nivel;
-                nivelBadge.style.backgroundColor =
-                    nivel === 'Fácil' ? '#4CAF50' :
-                        nivel === 'Normal' ? '#2196F3' : '#F44336';
-
-                // Usar mayúsculas y minúsculas según el JSON que muestras:
-                document.getElementById('texto-pregunta').textContent = pregunta.texto;
-
-                const opcionesContainer = document.getElementById('opciones-container');
-                opcionesContainer.innerHTML = '';
-
-                pregunta.opciones.forEach(opcion => {
-                    const btn = document.createElement('button');
-                    btn.className = 'btn btn-outline-light py-2';
-                    btn.textContent = opcion.texto;
-                    btn.addEventListener('click', () => verificarRespuesta(opcion.correcta, pregunta.puntos));
-                    opcionesContainer.appendChild(btn);
-                });
-            }
-
-            function verificarRespuesta(esCorrecta, puntos) {
-                const puntosGanados = esCorrecta ? puntos : 0;
-
-                document.getElementById('pregunta-container').classList.add('d-none');
-                const resultadoContainer = document.getElementById('resultado-container');
-                resultadoContainer.classList.remove('d-none');
-
-                const alert = document.getElementById('resultado-alert');
-                alert.className = esCorrecta ? 'alert alert-success' : 'alert alert-danger';
-
-                document.getElementById('resultado-texto').textContent =
-                    esCorrecta ? '¡Respuesta Correcta!' : 'Respuesta Incorrecta';
-                document.getElementById('puntos-texto').textContent =
-                    `Has ganado ${puntosGanados} punto(s)`;
-
-                btnGirar.style.display = 'none';
-                btnCerrar.style.display = 'block';
-
-                fetch('/Puntaje/GuardarPuntaje', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ valor: puntosGanados })
-                }).catch(error => console.error('Error al guardar puntaje:', error));
-            }
-
-            btnCerrar.addEventListener('click', function () {
-                const modal = bootstrap.Modal.getInstance(document.getElementById('juegoModal'));
-                modal.hide();
-            });
-        });
-    </script>
-    }
-
-}
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,38 +1,150 @@
 @model ProyectoCF.Models.Usuario
 
-<h2>Crear Usuario</h2>
+@{
+    ViewData["Title"] = "Crear Usuario";
+}
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label for="Nombre">Nombre</label>
-        <input type="text" name="Nombre" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label for="Apellido">Apellido</label>
-        <input type="text" name="Apellido" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label for="Email">Email</label>
-        <input type="email" name="Email" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label for="Contrasena">Contraseña</label>
-        <input type="password" name="Contrasena" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label for="Rol">Rol</label>
-        <select name="Rol" class="form-control">
-            @if (Context.Session.GetString("Rol") == "Administrador")
-            {
-                <option value="Administrador">Administrador</option>
-                <option value="Docente">Docente</option>
-                <option value="Estudiante">Estudiante</option>
+<style>
+    body {
+        background-color: #121212;
+        color: #fff;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 2rem;
+    }
+
+    .form-card {
+        background-color: #1f1f1f;
+        border-radius: 16px;
+        padding: 2rem;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 0 12px rgba(187, 134, 252, 0.2);
+    }
+
+        .form-card h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #bb86fc;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+    .form-group-custom {
+        margin-bottom: 1rem;
+    }
+
+        .form-group-custom label {
+            color: #ccc;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .form-group-custom input,
+        .form-group-custom select {
+            background-color: #2c2c2c;
+            border: none;
+            border-radius: 8px;
+            padding: 0.7rem 1rem;
+            color: #fff;
+            width: 100%;
+        }
+
+            .form-group-custom input:focus,
+            .form-group-custom select:focus {
+                outline: none;
+                background-color: #3a3a3a;
+                box-shadow: 0 0 0 2px #bb86fc;
             }
-            else if (Context.Session.GetString("Rol") == "Docente")
-            {
-                <option value="Estudiante">Estudiante</option>
-            }
-        </select>
+
+    .text-danger {
+        color: #f87171;
+        font-size: 0.85rem;
+        margin-top: 0.2rem;
+    }
+
+    .btn-submit {
+        background: linear-gradient(to right, #bb86fc, #9b5de5);
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+        .btn-submit:hover {
+            background: linear-gradient(to right, #a678f4, #804cd9);
+        }
+</style>
+
+<div class="form-container">
+    <div class="form-card">
+        <h2>Crear Usuario</h2>
+
+        <form asp-action="Create" method="post">
+            <div class="form-group-custom">
+                <label asp-for="Nombre"></label>
+                <input asp-for="Nombre" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group-custom">
+                <label asp-for="Apellido"></label>
+                <input asp-for="Apellido" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+
+            <div class="form-group-custom">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group-custom">
+                <label asp-for="Contrasena"></label>
+                <input asp-for="Contrasena" type="password" />
+                <span asp-validation-for="Contrasena" class="text-danger"></span>
+            </div>
+
+            <div class="form-group-custom">
+                <label for="ConfirmarContrasena">Confirmar Contraseña</label>
+                <input type="password" name="ConfirmarContrasena" id="ConfirmarContrasena" />
+                <span class="text-danger">@ViewData["ErrorPassword"]</span>
+            </div>
+
+            <div class="form-group-custom">
+                <label asp-for="Rol"></label>
+                <select asp-for="Rol">
+                    @if (Context.Session.GetString("Rol") == "Administrador")
+                    {
+                        <option value="Administrador">Administrador</option>
+                        <option value="Docente">Docente</option>
+                        <option value="Estudiante">Estudiante</option>
+                    }
+                    else if (Context.Session.GetString("Rol") == "Docente")
+                    {
+                        <option value="Estudiante">Estudiante</option>
+                    }
+                </select>
+                <span asp-validation-for="Rol" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn-submit">Guardar Usuario</button>
+        </form>
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
-</form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

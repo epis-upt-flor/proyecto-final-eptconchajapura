@@ -1,0 +1,113 @@
+/* Estilos para la vista Detalles de Evaluación */
+
+#respuestasModal .modal-content {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#respuestasModal .modal-header {
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    border-bottom: none;
+}
+
+#respuestasModal .modal-title {
+    font-weight: 600;
+    color: #fff;
+}
+
+#respuestasModal .close {
+    text-shadow: none;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+    #respuestasModal .close:hover {
+        opacity: 1;
+    }
+
+#respuestasModal .modal-body {
+    padding: 20px;
+}
+
+#respuestasModal .modal-footer {
+    border-top: 1px solid #eee;
+    background-color: #f8f9fa;
+}
+
+#respuestasModal .accordion .card {
+    border: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#respuestasModal .accordion .card-header {
+    background-color: #f8f9fa;
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+#respuestasModal .accordion .btn-link {
+    color: #495057;
+    font-weight: 500;
+    text-decoration: none;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+    #respuestasModal .accordion .btn-link:hover {
+        color: #0056b3;
+    }
+
+#respuestasModal .table {
+    margin-bottom: 0;
+}
+
+    #respuestasModal .table thead th {
+        background-color: #f1f3f5;
+        font-weight: 600;
+        border-bottom-width: 1px;
+    }
+
+#respuestasModal .table-success {
+    background-color: rgba(40, 167, 69, 0.08);
+}
+
+#respuestasModal .table-danger {
+    background-color: rgba(220, 53, 69, 0.08);
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+    .modal-backdrop.fade.show {
+        opacity: 1 !important;
+    }
+
+/* Responsive */
+@media (max-width: 576px) {
+    .modal-dialog {
+        max-width: 95%;
+    }
+
+    h2, h3, h5 {
+        font-size: 1.2rem;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .modal-body {
+        padding: 10px;
+    }
+}

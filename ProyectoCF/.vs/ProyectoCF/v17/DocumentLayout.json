@@ -1,32 +1,389 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\TM95\\Documents\\GitHub\\proyecto-final-eptconchajapura\\ProyectoCF\\",
+  "WorkspaceRootPath": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\TM95\\AppData\\Local\\Temp\\.vsdbgsrc\\7f0ac71252d76de7abb95c8ecd2f6dbb3d669a4d1aa351fe394c7ba2c4dd1103\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\wwwroot\\css\\sopa.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:wwwroot\\css\\sopa.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\views\\juegosrecreativos\\sopa.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:views\\juegosrecreativos\\sopa.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\controllers\\juegosrecreativoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:controllers\\juegosrecreativoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\models\\preguntasjuego.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:models\\preguntasjuego.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\models\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:models\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\migrations\\connectionmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:migrations\\connectionmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\controllers\\resultadoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:controllers\\resultadoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\models\\dto\\resultadosopadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:models\\dto\\resultadosopadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\models\\dto\\resultadojuegodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:models\\dto\\resultadojuegodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\models\\respuestasjuegos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:models\\respuestasjuegos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\models\\respuestajuegos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:models\\respuestajuegos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\models\\resultadosopa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:models\\resultadosopa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\models\\juegosrecreativos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:models\\juegosrecreativos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\wwwroot\\css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:wwwroot\\css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\views\\juegosrecreativos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:views\\juegosrecreativos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\views\\juegosrecreativos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:views\\juegosrecreativos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|c:\\users\\usuario\\desktop\\mejoras\\despliege-proyectocf\\controllers\\preguntascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4114DBA-16AE-478D-8D5D-B93B246180BA}|ProyectoCF.csproj|solutionrelative:controllers\\preguntascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
     {
-      "Orientation": 1,
+      "Orientation": 0,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedHeight": 232,
+          "DockedWidth": 200,
           "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\TM95\\AppData\\Local\\Temp\\.vsdbgsrc\\7f0ac71252d76de7abb95c8ecd2f6dbb3d669a4d1aa351fe394c7ba2c4dd1103\\Program.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\7f0ac71252d76de7abb95c8ecd2f6dbb3d669a4d1aa351fe394c7ba2c4dd1103\\Program.cs",
-              "ToolTip": "C:\\Users\\TM95\\AppData\\Local\\Temp\\.vsdbgsrc\\7f0ac71252d76de7abb95c8ecd2f6dbb3d669a4d1aa351fe394c7ba2c4dd1103\\Program.cs",
-              "RelativeToolTip": "..\\..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\7f0ac71252d76de7abb95c8ecd2f6dbb3d669a4d1aa351fe394c7ba2c4dd1103\\Program.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAACAAAAAQAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T02:17:31.697Z",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAALUAAAAAAAAAAAAYwNoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-24T21:48:45.279Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-24T21:34:10.663Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Views\\Auth\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Auth\\Login.cshtml",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Views\\Auth\\Login.cshtml",
+              "RelativeToolTip": "Views\\Auth\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-24T21:34:30.062Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Sopa.cshtml",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Views\\Juegosrecreativos\\Sopa.cshtml",
+              "RelativeDocumentMoniker": "Views\\Juegosrecreativos\\Sopa.cshtml",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Views\\Juegosrecreativos\\Sopa.cshtml",
+              "RelativeToolTip": "Views\\Juegosrecreativos\\Sopa.cshtml",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAIwBQAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-24T17:01:09.246Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "sopa.css",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\wwwroot\\css\\sopa.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\sopa.css",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\wwwroot\\css\\sopa.css",
+              "RelativeToolTip": "wwwroot\\css\\sopa.css",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAIwA8AAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-24T17:00:43.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "JuegosrecreativosController.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Controllers\\JuegosrecreativosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\JuegosrecreativosController.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Controllers\\JuegosrecreativosController.cs",
+              "RelativeToolTip": "Controllers\\JuegosrecreativosController.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAqwEoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:42:20.637Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PreguntasJuego.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\PreguntasJuego.cs",
+              "RelativeDocumentMoniker": "Models\\PreguntasJuego.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\PreguntasJuego.cs",
+              "RelativeToolTip": "Models\\PreguntasJuego.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T16:58:12.696Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowGYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T19:10:32.188Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-24T19:09:45.771Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T19:26:01.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ConnectionModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Migrations\\ConnectionModelSnapshot.cs",
+              "RelativeDocumentMoniker": "Migrations\\ConnectionModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Migrations\\ConnectionModelSnapshot.cs",
+              "RelativeToolTip": "Migrations\\ConnectionModelSnapshot.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T19:25:35.32Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Connection.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\Connection.cs",
+              "RelativeDocumentMoniker": "Models\\Connection.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\Connection.cs",
+              "RelativeToolTip": "Models\\Connection.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T16:58:25.103Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ResultadosController.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Controllers\\ResultadosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ResultadosController.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Controllers\\ResultadosController.cs",
+              "RelativeToolTip": "Controllers\\ResultadosController.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAiwC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:07:13.171Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ResultadoJuegoDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\DTO\\ResultadoJuegoDTO.cs",
+              "RelativeDocumentMoniker": "Models\\DTO\\ResultadoJuegoDTO.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\DTO\\ResultadoJuegoDTO.cs",
+              "RelativeToolTip": "Models\\DTO\\ResultadoJuegoDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:48:11.295Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ResultadoSopaDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\DTO\\ResultadoSopaDTO.cs",
+              "RelativeDocumentMoniker": "Models\\DTO\\ResultadoSopaDTO.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\DTO\\ResultadoSopaDTO.cs",
+              "RelativeToolTip": "Models\\DTO\\ResultadoSopaDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:08:15.019Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "RespuestasJuegos.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\RespuestasJuegos.cs",
+              "RelativeDocumentMoniker": "Models\\RespuestasJuegos.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\RespuestasJuegos.cs",
+              "RelativeToolTip": "Models\\RespuestasJuegos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:13:27.775Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "RespuestaJuegos.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\RespuestaJuegos.cs",
+              "RelativeDocumentMoniker": "Models\\RespuestaJuegos.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\RespuestaJuegos.cs",
+              "RelativeToolTip": "Models\\RespuestaJuegos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:40:25.729Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ResultadoSopa.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\ResultadoSopa.cs",
+              "RelativeDocumentMoniker": "Models\\ResultadoSopa.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\ResultadoSopa.cs",
+              "RelativeToolTip": "Models\\ResultadoSopa.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:07:06.78Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Juegosrecreativos.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\Juegosrecreativos.cs",
+              "RelativeDocumentMoniker": "Models\\Juegosrecreativos.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Models\\Juegosrecreativos.cs",
+              "RelativeToolTip": "Models\\Juegosrecreativos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:19:58.981Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "login.css",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\wwwroot\\css\\login.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\login.css",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\wwwroot\\css\\login.css",
+              "RelativeToolTip": "wwwroot\\css\\login.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-24T17:00:30.143Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "PreguntasController.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Controllers\\PreguntasController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PreguntasController.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Controllers\\PreguntasController.cs",
+              "RelativeToolTip": "Controllers\\PreguntasController.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAiwEUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T16:52:35.427Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Views\\Juegosrecreativos\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Juegosrecreativos\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Views\\Juegosrecreativos\\Create.cshtml",
+              "RelativeToolTip": "Views\\Juegosrecreativos\\Create.cshtml",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAkwDwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-24T16:15:18.815Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Views\\Juegosrecreativos\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Juegosrecreativos\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\mejoras\\Despliege-ProyectoCF\\Views\\Juegosrecreativos\\Index.cshtml",
+              "RelativeToolTip": "Views\\Juegosrecreativos\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-24T16:22:04.54Z"
             }
           ]
         }

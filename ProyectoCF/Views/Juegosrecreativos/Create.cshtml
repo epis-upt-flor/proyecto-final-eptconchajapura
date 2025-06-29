@@ -1,0 +1,60 @@
+﻿@model ProyectoCF.Models.Juegosrecreativos
+@{
+    ViewData["Title"] = "Crear Sopa de Letras";
+}
+
+<div class="container mt-4">
+    <div class="card shadow rounded-4">
+        <div class="card-header bg-primary text-white rounded-top-4">
+            <h4 class="mb-0"><i class="fas fa-plus-circle"></i> @ViewData["Title"]</h4>
+        </div>
+        <div class="card-body">
+
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+            <form asp-action="Create" method="post">
+                <input type="hidden" name="Tipo" value="Sopa de Letras" />
+
+                <div class="mb-3">
+                    <label asp-for="Titulo" class="form-label">Título</label>
+                    <input asp-for="Titulo" class="form-control" placeholder="Ej. Animales del bosque" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Descripcion" class="form-label">Descripción</label>
+                    <textarea asp-for="Descripcion" class="form-control" rows="3" placeholder="Descripción del juego..."></textarea>
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Contenido" class="form-label">Palabras del juego (separadas por coma o salto de línea)</label>
+                    <textarea asp-for="Contenido" class="form-control" rows="4" placeholder="Ej: perro, gato, árbol o una por línea"></textarea>
+                    <span asp-validation-for="Contenido" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="CursoId" class="form-label">Curso</label>
+                    <select asp-for="CursoId" class="form-select" asp-items="ViewBag.Cursos">
+                        <option value="">Seleccione un curso</option>
+                    </select>
+                    <span asp-validation-for="CursoId" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success me-2">
+                        <i class="fas fa-save"></i> Guardar
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

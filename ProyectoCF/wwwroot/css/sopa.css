@@ -1,0 +1,54 @@
+﻿/* sopa.css */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 4px;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+.cell {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .cell:hover {
+        background-color: #f0f0f0;
+    }
+
+    .cell.selected {
+        background-color: #cce5ff;
+        border: 2px solid #007bff;
+    }
+
+    .cell.found {
+        background-color: #d4edda;
+        color: #155724;
+        border: 2px solid #28a745;
+    }
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(12, minmax(22px, 1fr));
+        gap: 2px;
+    }
+
+    .cell {
+        font-size: 0.75rem;
+    }
+}

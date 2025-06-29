@@ -1,0 +1,310 @@
+/* Fondo oscuro general */
+body {
+    background-color: #121212;
+    color: #fff;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Título */
+h2.display-title {
+    color: #bb86fc;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+/* Botón Crear Curso */
+.btn-create {
+    background-color: #bb86fc;
+    color: #121212;
+    font-weight: 500;
+    border-radius: 50px;
+    padding: 0.6rem 1.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+    .btn-create:hover {
+        background-color: #9b5de5;
+        color: white;
+    }
+
+/* Tabla personalizada sin efectos de zoom ni transformaciones */
+.custom-table {
+    background-color: #1f1f1f;
+    border-radius: 12px;
+    overflow-x: auto;
+    box-shadow: 0 0 10px rgba(187, 134, 252, 0.2);
+}
+
+    .custom-table thead {
+        background-color: #bb86fc;
+        color: #121212;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .custom-table tbody tr:hover {
+        background-color: #2a2a3d;
+        transition: background-color 0.3s ease;
+    }
+
+/* Celdas centradas */
+.table td,
+.table th {
+    vertical-align: middle;
+    text-align: center;
+    padding: 0.75rem;
+}
+
+/* Responsividad básica */
+@media (max-width: 768px) {
+    .table thead {
+        display: none;
+    }
+
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+
+        .table tr {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #444;
+        }
+
+        .table td {
+            text-align: right;
+            padding-left: 50%;
+            position: relative;
+        }
+
+            .table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 1rem;
+                width: 45%;
+                white-space: nowrap;
+                color: #bb86fc;
+                font-weight: bold;
+                text-align: left;
+            }
+}
+
+/* ===== Botón Editar ===== */
+.editBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: none;
+    background-color: rgb(93, 93, 116);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.123);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+}
+
+    .editBtn svg {
+        height: 16px;
+        fill: white;
+        z-index: 3;
+        transition: transform 0.2s ease;
+    }
+
+    .editBtn:hover svg {
+        transform: rotate(-15deg) translateX(4px);
+    }
+
+/* ===== Botón Eliminar ===== */
+.bin-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgb(255, 95, 95);
+    cursor: pointer;
+    border: 2px solid rgb(255, 201, 201);
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+}
+
+.bin-top,
+.bin-bottom {
+    z-index: 2;
+}
+
+.bin-bottom {
+    width: 14px;
+}
+
+.bin-top {
+    width: 16px;
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.bin-button:hover .bin-top {
+    transform: rotate(45deg);
+}
+
+.bin-button:hover {
+    background-color: rgb(255, 0, 0);
+}
+
+.garbage {
+    position: absolute;
+    width: 13px;
+    height: auto;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.bin-button:hover .garbage {
+    animation: throw 0.4s linear;
+    opacity: 1;
+}
+
+/* Animación de basura al eliminar */
+@keyframes throw {
+    from {
+        transform: translate(-400%, -700%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(0%, 0%);
+        opacity: 1;
+    }
+}
+/* ===== Estilos para la sección de Materiales ===== */
+
+/* Botón "Agregar Material" */
+.btn-primary {
+    background-color: #bb86fc;
+    border: none;
+    color: #121212;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #9b5de5;
+        color: white;
+    }
+
+/* Tablas oscuras */
+.table-dark {
+    background-color: #1f1f1f;
+}
+
+    .table-dark th,
+    .table-dark td {
+        text-align: center;
+        vertical-align: middle;
+        color: white;
+    }
+
+    .table-dark tbody tr:hover {
+        background-color: #2a2a3d;
+    }
+
+/* Botones de tabla */
+.btn-sm i {
+    margin-right: 4px;
+}
+
+/* Modal oscuro */
+.modal-content.bg-dark {
+    background-color: #1f1f1f;
+    color: white;
+}
+
+.modal-header,
+.modal-footer {
+    border-color: #333;
+}
+
+.btn-close-white {
+    filter: invert(1);
+}
+
+/* Responsive para tablas (vista móvil) */
+@media (max-width: 768px) {
+    .table thead {
+        display: none;
+    }
+
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+
+        .table tr {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #444;
+        }
+
+        .table td {
+            text-align: right;
+            padding-left: 50%;
+            position: relative;
+        }
+
+            .table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 1rem;
+                width: 45%;
+                white-space: nowrap;
+                color: #bb86fc;
+                font-weight: bold;
+                text-align: left;
+            }
+}
+.btn-create {
+    background-color: #bb86fc;
+    color: #121212;
+    font-weight: 500;
+    border-radius: 50px;
+    padding: 0.6rem 1.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+    .btn-create:hover {
+        background-color: #9b5de5;
+        color: white;
+    }
+.viewBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: none;
+    background-color: #5bc0de; /* celeste */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+    .viewBtn i {
+        font-size: 16px;
+        transition: transform 0.3s ease;
+    }
+
+    .viewBtn:hover {
+        background-color: #31b0d5;
+        transform: scale(1.1);
+    }

@@ -1,0 +1,192 @@
+﻿@using System.Text.Json
+@using Newtonsoft.Json
+
+@{
+    ViewData["Title"] = "Sopa de Letras - Juego Educativo";
+    var juegoId = ViewBag.JuegoId;
+    var palabras = (List<string>)ViewBag.Palabras;
+    var usuarioId = ViewBag.UsuarioId;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+    <link href="~/css/sopa.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container text-center mt-4">
+        <h2 class="mb-2">@ViewData["Title"]</h2>
+        <p><strong>Palabras:</strong> @string.Join(", ", palabras)</p>
+        <p><strong>Tiempo restante:</strong> <span id="timer" class="text-danger fw-bold" data-time="120">02:00</span></p>
+
+        <div id="grid" class="grid mx-auto"></div>
+
+        <div class="mt-4">
+            <button class="btn btn-success" onclick="submitResults()">Enviar Resultado</button>
+        </div>
+    </div>
+
+    <script>
+        const palabras = @Html.Raw(JsonConvert.SerializeObject(palabras));
+        const juegoId = @Html.Raw(JsonConvert.SerializeObject(juegoId));
+        const usuarioId = @Html.Raw(JsonConvert.SerializeObject(usuarioId));
+        const gridSize = 12;
+
+        let grid = [], selectedCells = [], foundWords = [];
+
+        function createEmptyGrid(size) {
+            grid = Array(size).fill().map(() => Array(size).fill(''));
+        }
+
+        function placeWords(words) {
+            for (let word of words) {
+                word = word.toUpperCase();
+                let placed = false;
+                while (!placed) {
+                    let dir = Math.random() < 0.5 ? 'H' : 'V';
+                    let row = Math.floor(Math.random() * gridSize);
+                    let col = Math.floor(Math.random() * gridSize);
+
+                    if (dir === 'H' && col + word.length <= gridSize) {
+                        let fits = true;
+                        for (let i = 0; i < word.length; i++) {
+                            if (grid[row][col + i] !== '' && grid[row][col + i] !== word[i]) {
+                                fits = false; break;
+                            }
+                        }
+                        if (fits) {
+                            for (let i = 0; i < word.length; i++) grid[row][col + i] = word[i];
+                            placed = true;
+                        }
+                    } else if (dir === 'V' && row + word.length <= gridSize) {
+                        let fits = true;
+                        for (let i = 0; i < word.length; i++) {
+                            if (grid[row + i][col] !== '' && grid[row + i][col] !== word[i]) {
+                                fits = false; break;
+                            }
+                        }
+                        if (fits) {
+                            for (let i = 0; i < word.length; i++) grid[row + i][col] = word[i];
+                            placed = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        function fillEmpty() {
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            for (let r = 0; r < gridSize; r++) {
+                for (let c = 0; c < gridSize; c++) {
+                    if (grid[r][c] === '') {
+                        grid[r][c] = letters[Math.floor(Math.random() * letters.length)];
+                    }
+                }
+            }
+        }
+
+        function renderGrid() {
+            const gridEl = document.getElementById('grid');
+            gridEl.innerHTML = '';
+            for (let r = 0; r < gridSize; r++) {
+                for (let c = 0; c < gridSize; c++) {
+                    const div = document.createElement('div');
+                    div.classList.add('cell');
+                    div.textContent = grid[r][c];
+                    div.dataset.row = r;
+                    div.dataset.col = c;
+                    div.onclick = () => selectCell(div);
+                    gridEl.appendChild(div);
+                }
+            }
+        }
+
+        function selectCell(cell) {
+            if (cell.classList.contains('found')) return;
+            cell.classList.toggle('selected');
+            const row = parseInt(cell.dataset.row), col = parseInt(cell.dataset.col);
+            const index = selectedCells.findIndex(c => c.row === row && c.col === col);
+
+            if (index !== -1) {
+                selectedCells.splice(index, 1);
+            } else {
+                selectedCells.push({ row, col, letter: grid[row][col] });
+            }
+
+            checkSelection();
+        }
+
+        function checkSelection() {
+            const word = selectedCells.map(c => c.letter).join('').toUpperCase();
+            if (palabras.includes(word) && !foundWords.includes(word)) {
+                foundWords.push(word);
+                for (const c of selectedCells) {
+                    const el = document.querySelector(`.cell[data-row="${c.row}"][data-col="${c.col}"]`);
+                    el.classList.remove('selected');
+                    el.classList.add('found');
+                }
+                selectedCells = [];
+
+                if (foundWords.length === palabras.length) {
+                    Swal.fire("¡Felicidades!", "Has encontrado todas las palabras", "success");
+                    clearInterval(timerInterval);
+                }
+            }
+        }
+
+        function submitResults() {
+            const tiempoRestante = parseInt(document.getElementById("timer").dataset.time);
+            const tiempoTranscurrido = 120 - tiempoRestante;
+
+            const data = {
+                juegoId: juegoId,
+                usuarioId: usuarioId,
+                palabrasEncontradas: foundWords,
+                tiempo: tiempoTranscurrido
+            };
+
+            fetch('/api/resultados/sopa', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            }).then(response => {
+                if (response.ok) {
+                    Swal.fire("✅ Resultado enviado", "¡Gracias por jugar!", "success");
+                } else {
+                    Swal.fire("❌ Error", "No se pudo registrar el resultado.", "error");
+                }
+            });
+        }
+
+        // Temporizador
+        let timer = 120;
+        const timerEl = document.getElementById("timer");
+        let timerInterval = setInterval(() => {
+            if (timer <= 0) {
+                clearInterval(timerInterval);
+                Swal.fire("⏰ Tiempo terminado", "Inténtalo nuevamente", "warning");
+                return;
+            }
+            timer--;
+            timerEl.dataset.time = timer;
+            const minutes = Math.floor(timer / 60).toString().padStart(2, '0');
+            const seconds = (timer % 60).toString().padStart(2, '0');
+            timerEl.innerText = `${minutes}:${seconds}`;
+        }, 1000);
+
+        // Inicialización
+        createEmptyGrid(gridSize);
+        placeWords(palabras);
+        fillEmpty();
+        renderGrid();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

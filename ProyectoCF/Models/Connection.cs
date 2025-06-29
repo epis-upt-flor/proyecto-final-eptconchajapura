@@ -18,5 +18,17 @@ namespace ProyectoCF.Models
         public DbSet<Entregable> Entregables { get; set; }
         public DbSet<RespuestaEstudiante> RespuestasEstudiantes { get; set; }
         public DbSet<Puntaje> Puntajes { get; set; }
+        //
+        //
+
+        public DbSet<Juegosrecreativos> Juegosrecreativos { get; set; }
+        public DbSet<PreguntasJuego> PreguntasJuego { get; set; }
+        public DbSet<ResultadoSopa> ResultadosSopa { get; set; }
+        public ICollection<PreguntasJuego>? PalabrasJuego { get; set; }
+
+        // Aquí va tu nueva tabla
+        public DbSet<RespuestasJuegos> RespuestasJuegos { get; set; }
+
+
     }
 }

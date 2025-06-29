@@ -1,0 +1,35 @@
+﻿@model List<ProyectoCF.Models.Juegosrecreativos>
+@{
+    ViewData["Title"] = "Juegos Educativos";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus-circle"></i> Crear nuevo juego</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var juego in Model)
+        {
+            <tr>
+                <td>@juego.Titulo</td>
+                <td>@juego.Tipo</td>
+                <td>@juego.Descripcion</td>
+                <td>
+                    <a asp-action="Sopa" asp-route-id="@juego.Id" class="btn btn-primary btn-sm"><i class="fas fa-play"></i> Jugar</a>
+                    <a asp-action="Delete" asp-route-id="@juego.Id" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

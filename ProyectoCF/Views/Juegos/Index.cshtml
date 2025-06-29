@@ -2,36 +2,44 @@
     ViewData["Title"] = "Juegos Educativos";
 }
 
-<div class="container mt-4">
-    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
-    
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="~/css/juegos.css" />
+
+<div class="container mt-5 mb-5">
+    <h1 class="text-center text-primary mb-4">
+        <i class="fas fa-gamepad mr-2"></i>@ViewData["Title"]
+    </h1>
+
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="game-container mb-4 p-3 border rounded bg-light">
-                @Html.Raw(ViewBag.Juegos[ViewBag.JuegoActual])
+        <div class="col-lg-10 col-md-12">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body game-container bg-light text-center">
+                    @Html.Raw(ViewBag.Juegos[ViewBag.JuegoActual])
+                </div>
             </div>
-            
-            <div class="navigation-controls text-center">
-                <a asp-action="Index" asp-route-juegoId="@(ViewBag.JuegoActual - 1)" 
-                   class="btn btn-primary @(ViewBag.JuegoActual == 0 ? "disabled" : "")">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+                <a asp-action="Index" asp-route-juegoId="@(ViewBag.JuegoActual - 1)"
+                   class="btn btn-outline-primary mb-2 @(ViewBag.JuegoActual == 0 ? "disabled" : "")">
                     <i class="fas fa-arrow-left"></i> Anterior
                 </a>
-                
-                <span class="mx-3">
+
+                <span class="mx-2 text-center mb-2 font-weight-bold">
                     Juego @(ViewBag.JuegoActual + 1) de @ViewBag.TotalJuegos
                 </span>
-                
-                <a asp-action="Index" asp-route-juegoId="@(ViewBag.JuegoActual + 1)" 
-                   class="btn btn-primary @(ViewBag.JuegoActual == ViewBag.TotalJuegos - 1 ? "disabled" : "")">
+
+                <a asp-action="Index" asp-route-juegoId="@(ViewBag.JuegoActual + 1)"
+                   class="btn btn-outline-primary mb-2 @(ViewBag.JuegoActual == ViewBag.TotalJuegos - 1 ? "disabled" : "")">
                     Siguiente <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
-            
-            <div class="quick-select mt-3 text-center">
+
+            <div class="text-center quick-select mt-3">
                 @for (int i = 0; i < ViewBag.TotalJuegos; i++)
                 {
-                    <a asp-action="Index" asp-route-juegoId="@i" 
-                       class="btn btn-sm @(i == ViewBag.JuegoActual ? "btn-success" : "btn-outline-secondary") mx-1">
+                    <a asp-action="Index" asp-route-juegoId="@i"
+                       class="btn btn-sm mb-2 mx-1 @(i == ViewBag.JuegoActual ? "btn-success" : "btn-outline-secondary")">
                         @(i + 1)
                     </a>
                 }
@@ -39,20 +47,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    .game-container {
-        min-height: 400px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .navigation-controls {
-        margin-bottom: 20px;
-    }
-    
-    .quick-select {
-        margin-top: 15px;
-    }
-</style>

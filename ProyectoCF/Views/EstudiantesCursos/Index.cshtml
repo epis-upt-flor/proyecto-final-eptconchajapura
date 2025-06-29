@@ -1,37 +1,55 @@
 @model IEnumerable<ProyectoCF.Models.EstudianteCurso>
 
+<!-- Reutilizamos el mismo CSS moderno -->
+<link rel="stylesheet" href="~/css/cursos.css" />
+
 <div class="text-center mb-4">
-    <h2 class="text-lg" style="color: #bb86fc;">Asignaciones de Cursos</h2>
+    <h2 class="display-title">Asignaciones de Cursos</h2>
 </div>
 
-<a asp-action="Create" class="btn btn-primary mb-3 d-block w-25 mx-auto">
-    <i class="fas fa-plus me-2"></i> Asignar Curso
-</a>
+<div class="text-center mb-4">
+    <a asp-controller="EstudiantesCursos" asp-action="Create" class="btn btn-create">
+        <i class="fas fa-plus me-2"></i> Asignar Curso
+    </a>
+</div>
 
-<div class="table-responsive">
-    <table class="table table-dark table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Estudiante</th>
-                <th scope="col">Curso</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var asignacion in Model)
-            {
+<div class="card custom-table">
+    <div class="card-body p-0">
+        <table class="table table-dark table-hover mb-0">
+            <thead>
                 <tr>
-                    <td>@asignacion.Estudiante.Nombre @asignacion.Estudiante.Apellido</td>
-                    <td>@asignacion.Curso.Nombre</td>
-                    <td>
-                        <form asp-action="Delete" asp-route-id="@asignacion.Id" method="post" style="display:inline;">
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash-alt me-1"></i> Eliminar
-                            </button>
-                        </form>
-                    </td>
+                    <th>Estudiante</th>
+                    <th>Curso</th>
+                    <th>Acciones</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var asignacion in Model)
+                {
+                    <tr>
+                        <td data-label="Estudiante">@asignacion.Estudiante.Nombre @asignacion.Estudiante.Apellido</td>
+                        <td data-label="Curso">@asignacion.Curso.Nombre</td>
+                        <td data-label="Acciones">
+                            <div class="d-flex justify-content-center">
+                                <a asp-action="Delete" asp-route-id="@asignacion.Id" title="Eliminar" class="bin-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 39 7" class="bin-top">
+                                        <line stroke-width="4" stroke="white" y2="5" x2="39" y1="5" />
+                                        <line stroke-width="3" stroke="white" y2="1.5" x2="26.0357" y1="1.5" x1="12" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 33 39" class="bin-bottom">
+                                        <path fill="white" d="M0 0H33V35C33 37.2091 31.2091 39 29 39H4C1.79086 39 0 37.2091 0 35V0Z" />
+                                        <path stroke-width="4" stroke="white" d="M12 6L12 29" />
+                                        <path stroke-width="4" stroke="white" d="M21 6V29" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 89 80" class="garbage">
+                                        <path d="M20.5 10.5L37.5 15.5L42.5 11.5L51.5 12.5L68.75 0L72 11.5L79.5 12.5H88.5L87 22L68.75 31.5L75.5 25L86 26L87 35.5L77.5 48L70.5 49.5L80 50L77.5 71.5L63.5 58.5L53.5 68.5L65.5 70.5L45.5 73L35.5 79.5L28 67L16 63L12 51.5L0 48L16 25L22.5 17L20.5 10.5Z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

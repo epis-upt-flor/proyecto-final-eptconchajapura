@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoCF.Models;
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace ProyectoCF.Controllers
 {
@@ -33,6 +35,7 @@ namespace ProyectoCF.Controllers
                 HttpContext.Session.SetString("Nombre", usuario.Nombre);
                 return RedirectToAction("Index", "Home");
             }
+
             ViewBag.Error = "Usuario o contraseña incorrectos.";
             return View();
         }
@@ -51,7 +54,6 @@ namespace ProyectoCF.Controllers
             var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
             return Challenge(properties, "Google");
         }
-
 
         [HttpGet]
         public async Task<IActionResult> GoogleResponse()

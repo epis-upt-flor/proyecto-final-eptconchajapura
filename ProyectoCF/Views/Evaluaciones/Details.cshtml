@@ -5,99 +5,14 @@
     ViewData["Title"] = "Detalles de Evaluación";
     var rol = Context.Session.GetString("Rol");
 }
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="~/css/detail.css" />
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
 
-<style>
-    #respuestasModal .modal-content {
-        border: none;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-
-    #respuestasModal .modal-header {
-        background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
-        border-bottom: none;
-    }
-
-    #respuestasModal .modal-title {
-        font-weight: 600;
-    }
-
-    #respuestasModal .close {
-        text-shadow: none;
-        opacity: 0.8;
-        transition: opacity 0.2s;
-    }
-
-        #respuestasModal .close:hover {
-            opacity: 1;
-        }
-
-    #respuestasModal .modal-body {
-        padding: 20px;
-    }
-
-    #respuestasModal .modal-footer {
-        border-top: 1px solid #eee;
-        background-color: #f8f9fa;
-    }
-
-    #respuestasModal .accordion .card {
-        border: 1px solid rgba(0,0,0,0.1);
-        margin-bottom: 10px;
-        border-radius: 5px;
-        overflow: hidden;
-    }
-
-    #respuestasModal .accordion .card-header {
-        background-color: #f8f9fa;
-        padding: 12px 15px;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    #respuestasModal .accordion .btn-link {
-        color: #495057;
-        font-weight: 500;
-        text-decoration: none;
-        width: 100%;
-        text-align: left;
-        display: flex;
-        align-items: center;
-        padding: 0;
-    }
-
-        #respuestasModal .accordion .btn-link:hover {
-            color: #0056b3;
-        }
-
-    #respuestasModal .table {
-        margin-bottom: 0;
-    }
-
-        #respuestasModal .table thead th {
-            background-color: #f1f3f5;
-            font-weight: 600;
-            border-bottom-width: 1px;
-        }
-
-    #respuestasModal .table-success {
-        background-color: rgba(40, 167, 69, 0.08);
-    }
-
-    #respuestasModal .table-danger {
-        background-color: rgba(220, 53, 69, 0.08);
-    }
-    .modal-backdrop {
-        background-color: rgba(0, 0, 0, 0.5);
-    }
-
-        .modal-backdrop.fade.show {
-            opacity: 1 !important;
-        }
-</style>
 <div class="container">
     <h2 class="mb-3">@Model.Titulo</h2>
 
@@ -254,20 +169,16 @@
 
 @section Scripts {
     <script>
-        $(document).ready(function() {
-            $('#btnVerRespuestas').click(function() {
+        $(document).ready(function () {
+            $('#btnVerRespuestas').click(function () {
                 var hasData = @((ViewData["RespuestasAlumnos"] as List<RespuestasAlumnoViewModel>)?.Any() == true ? "true" : "false");
 
-                if(hasData) {
+                if (hasData) {
                     $('#respuestasModal').modal('show');
                 } else {
                     alert('No hay respuestas de alumnos para mostrar');
                 }
             });
-
-            // if ($('#alumnosAccordion .card').length > 0) {
-            //     $('#alumnosAccordion .card:first-child .collapse').addClass('show');
-            // }
         });
     </script>
 }
